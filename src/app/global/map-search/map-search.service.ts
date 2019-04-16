@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { debounceTime, switchMap, map, catchError } from 'rxjs/operators';
 import { Observable, Subject, of } from 'rxjs';
-import { HttpService } from 'src/app/core/http.service';
+import { HttpService } from 'src/app/core/http-service/http.service';
 import { geoAdress } from 'src/app/models/geoAdress';
 import { Coords } from 'src/app/models/coords';
 
