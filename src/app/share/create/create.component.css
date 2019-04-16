@@ -1,0 +1,160 @@
+:host {
+  display: block;
+  top: -20px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: 5;
+  background-color: rgba(20, 20, 20, 0.7);
+  padding: 8% 20% 15% 20%;
+}
+
+.close__btn {
+  position: absolute;
+  right: 0;
+  border-radius: 100% 200%;
+  background-color: rgba(200, 200, 200, 1);
+  opacity: 0.8;
+}
+
+.close__btn i {
+  color: rgba(0, 0, 0, 1);
+}
+
+.close__btn:hover {
+  opacity: 1;
+
+}
+
+.creator {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 200px;
+}
+
+.creator fieldset {
+  border: none;
+}
+
+form {
+  display: flex;
+  position: relative;
+  height: 85vh;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.img__loader {
+  position: relative;
+  flex-grow: 1;
+  background: url('../../assets/imgs/walk.jpg') no-repeat;
+  background-size: cover;
+  filter: grayscale(1) opacity(0.8);
+  border-radius: 0 0 500px 0;
+  margin-left: -5px;
+}
+
+.info__loader,
+.place__tags {
+  background-color: transparent;
+}
+
+input[type='file'] {
+  display: none;
+}
+
+.add-poster__btn {
+  position: absolute;
+  right: 190px;
+  bottom: 420px;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.8);
+  filter: opacity(0.7)
+}
+
+.add-poster__btn i {
+  color: rgb(6, 9, 14);
+  font-size: 40px;
+  margin-top: 28px;
+}
+
+.add-poster__btn:hover {
+  filter: none;
+}
+
+.info__loader {
+  width: 38%;
+  margin: 50px 60px 0 60px;
+}
+
+.title__loader {
+  margin: 50px 0 30px 0;
+  height: 70px;
+  color: rgba(4, 7, 9, 0.7)
+}
+
+#name {
+  height: 100%;
+  width: 100%;
+  font-size: 1.5rem;
+  padding-left: 10px;
+}
+
+#name:focus {
+  border-bottom: 1px solid #492B8C;
+  box-shadow: 0 1px 0 0 #512b80;
+}
+
+.creator textarea {
+  border-radius: 40px;
+  padding: 15px 20px;
+  min-height: 200px;
+  font-size: 1.2rem;
+  transition: border 0.3s;
+}
+
+.creator textarea:focus {
+  outline: none;
+  border: 2px solid #512b80;
+}
+
+.place__tags {
+  margin-top: 40px;
+  position: relative;
+  width: 50%;
+  margin-left: 160px;
+}
+
+#tags:focus {
+  border-bottom: 1px solid #492B8C;
+  box-shadow: 0 1px 0 0 #512b80;
+}
+
+.add-tag__btn {
+  position: absolute;
+  right: -10px;
+  top: 0;
+  background-color: #492B8C;
+}
+
+.add-tag__btn:hover {
+  opacity: 0.8;
+}
+
+.send__btn {
+  position: absolute;
+  bottom: 60px;
+  right: 200px;
+  border-radius: 50px;
+  color: #492B8C;
+  border: 2px solid #492B8C;
+  background-color: transparent;
+}
+
+.send__btn:hover {
+  background-color: #492B8C;
+  color: white;
+  border: 2px solid #492B8C;
+}

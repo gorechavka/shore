@@ -2,8 +2,7 @@ import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/cor
 import { MapSearchService } from './map-search.service';
 import { Subject } from 'rxjs';
 import { Coords } from '../../models/coords';
-import { geoAdress } from 'src/app/models/geoAdress';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-map-search',

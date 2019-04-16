@@ -7,12 +7,10 @@ import { Coords } from '../../../models/coords';
   styleUrls: ['./map-page.component.css']
 })
 export class MapPageComponent implements OnInit {
-  coords: Coords;
+  @Input() coords: Coords;
+
+  placeChoosen: boolean = false;
   constructor() {}
 
   ngOnInit() {}
-
-  setCoords(newCoords: Coords) {
-    this.coords = newCoords;
-  }
 }

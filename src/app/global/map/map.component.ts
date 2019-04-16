@@ -2,8 +2,9 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { MapService } from './map.service';
 import { Coords } from '../../models/coords';
 import { MapSearchService } from '../map-search/map-search.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, Observable } from 'rxjs';
+import { takeUntil, map } from 'rxjs/operators';
+import { Address } from '../../models/address';
 
 interface Location {
   long: number;
@@ -34,32 +35,35 @@ export class MapComponent implements OnInit, OnDestroy {
     this.mapSearchService
       .searchQuery()
       .pipe(takeUntil(this.destroy$))
-      .subscribe(({ lat, lon, adress }) => {
+      .subscribe(({ lat, lon }) => {
         try {
           this.mapService.navigateTo(this.map, [lat, lon]);
-          this.mapService.setNewMark({
-            markers: this.markers,
-            coords: [lat, lon],
-            //доделать всплывающий адресс на карте - лучше по координатам делать обратный запрос на геокодинг и потом разбирать пришедший объект
-            popup: this.beautifyAdress(adress)
+          this.getAddress({ lat, lon }).subscribe(({ display_name }: Address) => {
+            this.mapService.setNewMark({
+              markers: this.markers,
+              coords: [lat, lon],
+              popup: display_name
+            });
           });
-
           //create handleError function
         } catch (err) {
           console.log(err.message);
           this.mapService.setDefaultLocation(this.map, this.markers);
         }
       });
+    this.listenClicks();
   }
 
   listenClicks() {
-    this.mapService.listen('click', this.map, ({ latlng }) => {
-      this.mapService.changeMark({ markers: this.markers, coords: latlng });
+    this.mapService.listen('click', this.map, ({ latlng: { lat, lng: lon } }) => {
+      this.getAddress({ lat, lon }).subscribe(({ display_name }) =>
+        this.mapService.changeMark({ markers: this.markers, coords: { lat, lon }, popup: display_name })
+      );
     });
   }
 
-  beautifyAdress(adress: string) {
-    return adress.split(' ').reduce((res, word: string) => res + ' ' + word[0].toUpperCase() + word.slice(1), '');
+  getAddress(coords: Coords): Observable<Address> {
+    return this.mapSearchService.getAddress(coords).pipe(takeUntil(this.destroy$));
   }
 
   ngOnDestroy(): void {

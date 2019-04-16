@@ -1,4 +1,4 @@
-export interface geoAdress {
+export interface geoAddress {
   lat: number;
   lon: number;
 }

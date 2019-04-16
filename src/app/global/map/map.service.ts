@@ -45,6 +45,9 @@ export class MapService {
     markers.addLayer(mark);
   }
 
+  // getAdress({lat, lon}){
+  // }
+
   listen(event, map, handler) {
     map.on(event, handler);
   }
