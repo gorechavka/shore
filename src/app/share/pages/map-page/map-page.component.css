@@ -1,0 +1,42 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+:host {
+  position: relative;
+}
+
+.map__container {
+  margin: auto;
+  width: 100%;
+  height: 93vh;
+  flex-grow: 1;
+}
+
+.leaflet-top {
+  align-self: center;
+  top: 10px;
+  width: 30%;
+  display: flex;
+}
+
+.next__btn {
+  background-color: #492B8C;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  margin-left: 30px;
+  border-radius: 30px;
+  color: white;
+  font-size: 1.1rem;
+  border: 2px solid #492B8C;
+  letter-spacing: 1px;
+}
+
+
+.next__btn:hover {
+  background-color: white;
+  color: #492B8C;
+}

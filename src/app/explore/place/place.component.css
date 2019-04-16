@@ -1,0 +1,190 @@
+:host {
+  display: block;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: 5;
+  background-color: rgba(20, 20, 20, 0.7);
+  padding: 8% 20% 15% 20%;
+}
+
+.close__btn {
+  position: absolute;
+  right: 0;
+  border-radius: 100% 200%;
+  background-color: rgba(200, 200, 200, 1);
+  opacity: 0.8;
+}
+
+.close__btn i {
+  color: rgba(0, 0, 0, 1);
+}
+
+.close__btn:hover {
+  opacity: 1;
+
+}
+
+.place {
+  display: flex;
+  position: relative;
+  border-radius: 150px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.place__poster {
+  width: 45%;
+  max-height: 100%;
+  position: relative;
+}
+
+.poster {
+  width: 100%;
+  border-radius: 0 0 200px 0;
+}
+
+
+.map__btn {
+  width: 80px;
+  height: 80px;
+  margin-left: 50px;
+  background-image: url('../../assets/imgs/map.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  font-weight: bold;
+  border-radius: 50px;
+  filter: grayscale(1);
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.place .map__btn {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+}
+
+.map__btn:hover {
+  filter: grayscale(0);
+}
+
+.place__info {
+  margin: 20px 20px 0 10%;
+  width: 40%;
+}
+
+.place__title {
+  font-weight: bold;
+  letter-spacing: 4px;
+  color: #202429;
+  margin-bottom: 50px;
+}
+
+.place__description {
+  font-size: 1.2rem;
+  text-align: justify;
+}
+
+.place__tags {
+  text-align: right;
+}
+
+.chip {
+  text-align: right;
+}
+
+.place__author {
+  cursor: pointer;
+  display: inline-flex;
+}
+
+.author__photo {
+  width: 48px;
+  height: 48px;
+  text-align: center;
+  margin-right: 20px;
+  filter: opacity(0.7);
+}
+
+.author__photo img {
+  display: inline-block;
+  width: 100%;
+}
+
+.author__info {
+  color: #424247;
+}
+
+.place__reviews {
+  display: flex;
+  margin-top: 30px;
+}
+
+.place__rating {
+  border: none;
+  justify-self: flex-start;
+  text-align: start;
+
+}
+
+.place__rating input {
+  display: none;
+}
+
+.rate {
+  margin-top: 10px;
+  display: inline-block;
+  width: 42px;
+  height: 42px;
+  background: url('../../assets/imgs/alien.png') no-repeat center;
+  background-size: cover;
+}
+
+.rate:nth-of-type(n+4) {
+  filter: grayscale(1)
+}
+
+.comment__form {
+  flex-grow: 1;
+  margin-right: 100px;
+}
+
+.comment__form textarea,
+.comment__form input {
+  border-radius: 30px;
+  padding: 10px;
+}
+
+.comment__form textarea:focus {
+  border: 2px solid #4a148c;
+  outline: none;
+}
+
+.place__reviews .comment__form #login:focus {
+  border-bottom-color: #512b80;
+  box-shadow: 0 1px 0 0 #512b80;
+}
+
+.comment__form textarea {
+  min-height: 100px;
+}
+
+.place .title {
+  font-size: 1.2rem;
+}
+
+.comment__btn {
+  margin-top: 20px;
+  border-radius: 20px;
+  background-color: #4a148c;
+  filter: opacity(0.8);
+  margin-left: 260px;
+}
+
+.comment__btn:hover {
+  background-color: transparent;
+  color: #4a148c;
+}

@@ -1,0 +1,67 @@
+<section class="place">
+  <button class="btn close__btn" (click)="onCloseClick()"><i class="close material-icons">close</i></button>
+  <div class="place__poster">
+    <img src="../imgs/photo.jpg" class="poster" alt="кросивое место">
+    <button class="map__btn btn"></button>
+  </div>
+  <div class="place__info">
+    <h2 class="place__title">КРОСИВОЕ МЕСТО</h2>
+    <a class="place__author">
+      <div class="author__photo" href="#">
+        <img src="../imgs/author.png" width="80px">
+      </div>
+      <div class="author__info">
+        <div class="author__login"> Mr. Банан Дикий </div>
+        <div class="author__date">29.09.1999</div>
+      </div>
+    </a>
+    <p class="place__description">
+      Очень красивое любимое место
+      всем советую посетить в ближайшем будущем
+      вам понравится обещаю
+      там плавают уточки и туман и
+      слушать сигур рос просто волшебно
+    </p>
+    <div class="place__tags">
+      <div class="chip">
+        #красиво
+      </div>
+      <div class="chip">
+        #природа
+      </div>
+      <div class="chip">
+        #туман
+      </div>
+      <div class="chip">
+        #mystery
+      </div>
+    </div>
+    <div class="place__reviews">
+      <!-- <section class="comment__form">
+        <h5 class="title">Ваш коментарий</h5>
+        <form>
+          <div class="comment__login">
+            <input type="text" class="author" placeholder="Ваш логин" id="login">
+          </div>
+          <div class="comment__text">
+            <textarea class="comment" placeholder="Ваш комментарий"></textarea>
+          </div>
+        </form>
+        <button type="submit" class="comment__btn btn">Отправить</button>
+      </section> -->
+      <fieldset class="place__rating" title="Оцени меня!">
+        <h5 class="title">Ваша оценка:)</h5>
+        <input type="radio" id="rate-1">
+        <label for="rate-1" class="rate"></label>
+        <input type="radio" id="rate-2">
+        <label for="rate-2" class="rate"></label>
+        <input type="radio" id="rate-3">
+        <label for="rate-3" class="rate"></label>
+        <input type="radio" id="rate-4">
+        <label for="rate-4" class="rate"></label>
+        <input type="radio" id="rate-5">
+        <label for="rate-5" class="rate"></label>
+      </fieldset>
+    </div>
+  </div>
+</section>

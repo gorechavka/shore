@@ -1,0 +1,68 @@
+.categories {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 70vw;
+  max-width: 100vw;
+  height: 75vh;
+  margin: 40px auto;
+  padding: 40px 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.category {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  max-width: 40%;
+  height: 240px;
+  border-radius: 90px;
+  margin-right: 50px;
+  margin-bottom: 50px;
+  filter: grayscale(1) brightness(0.5)
+}
+
+.category:hover {
+  filter: none;
+}
+
+.category__tip {
+  display: inline-block;
+  align-self: flex-end;
+  margin-bottom: 20px;
+  color: #DA357D;
+}
+
+.food {
+  background: url(../../assets/imgs/food.png) no-repeat center;
+}
+
+.coffee {
+  background: url(../../assets/imgs/coffee.png) no-repeat center;
+}
+
+.beer {
+  background: url(../../assets/imgs/beer.png) no-repeat center;
+}
+
+.clubs {
+  background: url(../../assets/imgs/clubs.png) no-repeat center;
+}
+
+.movie {
+  background: url(../../assets/imgs/movie.png) no-repeat center;
+}
+
+.nature {
+  background: url(../../assets/imgs/nature.png) no-repeat center;
+}
+
+.entertainment {
+  background: url(../../assets/imgs/fun.png) no-repeat center;
+}
+
+.music {
+  background: url(../../assets/imgs/music.png) no-repeat center;
+}

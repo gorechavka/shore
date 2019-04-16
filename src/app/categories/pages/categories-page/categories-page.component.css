@@ -1,0 +1,13 @@
+.categories__title {
+  font-size: 2.7rem;
+  margin-top: 40px;
+  text-align: center;
+  color: #20073f;
+}
+
+.next__btn {
+  width: 80px;
+  height: 80px;
+  justify-self: flex-end;
+  align-self: flex-end;
+}

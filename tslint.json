@@ -1,9 +1,49 @@
 {
-  "extends": "tslint:recommended",
-  "rulesDirectory": [
-    "codelyzer"
-  ],
+  "extends": ["codelyzer"],
   "rules": {
+    "component-class-suffix": true,
+    "component-max-inline-declarations": true,
+    "component-selector": [true, "element", "sg", "kebab-case"],
+    "contextual-lifecycle": true,
+    "directive-class-suffix": true,
+    "directive-selector": [true, "attribute", "sg", "camelCase"],
+    "no-attribute-decorator": true,
+    "no-conflicting-lifecycle": true,
+    "no-forward-ref": true,
+    "no-host-metadata-property": true,
+    "no-input-rename": true,
+    "no-inputs-metadata-property": true,
+    "no-lifecycle-call": true,
+    "no-output-native": true,
+    "no-output-on-prefix": true,
+    "no-output-rename": true,
+    "no-outputs-metadata-property": true,
+    "no-pipe-impure": true,
+    "no-queries-metadata-property": true,
+    "no-unused-css": true,
+    "prefer-inline-decorator": true,
+    "prefer-output-readonly": true,
+    "template-banana-in-box": true,
+    "template-conditional-complexity": [true, 4],
+    "template-cyclomatic-complexity": [true, 5],
+    "template-i18n": [true, "check-id", "check-text"],
+    "template-no-negated-async": true,
+    "template-use-track-by-function": true,
+    "use-component-selector": true,
+    "use-component-view-encapsulation": true,
+    "use-lifecycle-interface": true,
+    "use-pipe-transform-interface": true,
+    "typedef": [
+      true,
+      "arrow-call-signature",
+      "parameter",
+      "arrow-parameter",
+      "property-declaration",
+      "variable-declaration",
+      "member-variable-declaration",
+      "object-destructuring",
+      "array-destructuring"
+    ],
     "array-type": false,
     "arrow-parens": false,
     "deprecation": {
@@ -19,7 +59,7 @@
       true,
       140
     ],
-    "member-access": false,
+    "member-access": true,
     "member-ordering": [
       true,
       {
@@ -61,15 +101,9 @@
       "single"
     ],
     "trailing-comma": false,
-    "no-output-on-prefix": true,
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
     "use-host-property-decorator": true,
-    "no-input-rename": true,
-    "no-output-rename": true,
     "use-life-cycle-interface": true,
-    "use-pipe-transform-interface": true,
-    "component-class-suffix": true,
-    "directive-class-suffix": true
   }
 }
