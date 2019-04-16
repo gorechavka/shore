@@ -40,7 +40,7 @@ export class MapService {
   }
 
   setNewMark({ markers, coords, popup = undefined }) {
-    const mark = L.marker(coords, { draggable: true });
+    const mark = L.marker(coords);
     if (popup !== undefined) mark.bindPopup(popup).openPopup();
     markers.addLayer(mark);
   }
