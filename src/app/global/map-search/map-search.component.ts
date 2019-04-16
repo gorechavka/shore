@@ -1,30 +1,41 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { MapSearchService } from './map-search.service';
 import { Subject } from 'rxjs';
 import { Coords } from '../../models/coords';
 import { geoAdress } from 'src/app/models/geoAdress';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-map-search',
   templateUrl: './map-search.component.html',
   styleUrls: ['./map-search.component.css']
 })
-export class MapSearchComponent implements OnInit {
+export class MapSearchComponent implements OnInit, OnDestroy {
   @Output() newCoords = new EventEmitter<Coords>();
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private mapSearchService: MapSearchService) {}
 
   ngOnInit() {
     //обработка ошибок!!!
-    this.mapSearchService.searchQuery().subscribe(
-      (coords: Coords) => {
-        this.newCoords.emit(coords);
-      },
-      err => console.log(err)
-    );
+    this.mapSearchService
+      .searchQuery()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (coords: Coords) => {
+          this.newCoords.emit(coords);
+        },
+        err => console.log(err)
+      );
   }
 
   onSearch(input) {
     this.mapSearchService.setQuery(input);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
   }
 }
