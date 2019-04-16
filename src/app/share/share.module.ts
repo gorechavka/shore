@@ -5,9 +5,11 @@ import { PlaceFormComponent } from './place-form/place-form.component';
 import { MapModule } from '../global/map/map.module';
 import { MapSearchModule } from '../global/map-search/map-search.module';
 import { CreateComponent } from './create/create.component';
+import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 
 @NgModule({
   declarations: [MapPageComponent, PlaceFormComponent, CreateComponent],
-  imports: [CommonModule, MapModule, MapSearchModule]
+  imports: [CommonModule, MapModule, MapSearchModule, ReactiveFormsModule],
+  providers: [FormBuilder]
 })
 export class ShareModule {}

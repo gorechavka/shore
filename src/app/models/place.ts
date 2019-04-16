@@ -1,7 +1,9 @@
+import { Coords } from 'src/app/models/coords';
+
 export interface Place {
-  name: string;
+  title: string;
   description: string;
-  photo: string;
-  coords: string | number;
+  image: File | string;
+  coords?: Coords;
   id?: string | number;
 }

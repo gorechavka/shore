@@ -1,8 +1,10 @@
 <section class="creator">
   <button class="btn close__btn" (click)="onCloseClick()"><i class="close material-icons">close</i></button>
-  <form enctype="multipart/form-data" method="POST">
+  <form enctype="multipart/form-data" method="POST" [formGroup]="form" (submit)="onSubmit($event)">
     <fieldset class="img__loader">
-      <input type="file" accept="image/*" id="poster" name="poster">
+      <img [attr.src]="form.get('poster').value" *ngIf="imageLoaded" class="image__preview">
+      <input type="file" accept="image/*" id="poster" name="poster" formControlName="poster"
+        (change)="onFileChange($event.target)">
       <label for="poster" class="btn-floating add-poster__btn" title="Добавить фото">
         <i class="material-icons">add</i>
       </label>
@@ -10,9 +12,11 @@
     <fieldset class="info__loader">
       <h4>Расскажите о вашем месте</h4>
       <div class="title__loader">
-        <input type="text" name="title" placeholder="Название" id="name">
+        <input type="text" name="title" placeholder="Название" id="name" formControlName="title"
+          [class.is-invalid]="titleInvalid">
       </div>
-      <textarea name="decription" placeholder="Опишите ваше место"></textarea>
+      <textarea name="decription" placeholder="Опишите ваше место" formControlName="description"
+        [class.is-invalid]="descriptionInvalid"></textarea>
       <fieldset class="place__tags">
         <input type="text" name="tag" placeholder="Добавьте теги" id="tags">
         <button class="btn-floating add-tag__btn" title="Добавить тег">
@@ -20,6 +24,7 @@
         </button>
       </fieldset>
     </fieldset>
-    <button type="submit" class="send__btn btn-large">Отправить</button>
+    <button type="submit" class="send__btn btn-large">
+      Отправить</button>
   </form>
 </section>

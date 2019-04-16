@@ -16,34 +16,29 @@ export class PlaceListComponent implements OnInit {
   ngOnInit() {
     this.places = [
       {
-        name: 'Река',
+        title: 'Река',
         description: 'река грязная',
-        photo: '../assets/places/place.jpeg',
-        coords: 'aaaaa'
+        image: '../assets/places/place.jpeg'
       },
       {
-        name: 'Дом',
+        title: 'Дом',
         description: 'который построил Джек',
-        photo: '../assets/places/place.jpeg',
-        coords: 'aaaaa'
+        image: '../assets/places/place.jpeg'
       },
       {
-        name: 'Гусятня',
+        title: 'Гусятня',
         description: 'который построил Джек',
-        photo: '../assets/places/place.jpeg',
-        coords: 'aaaaa'
+        image: '../assets/places/place.jpeg'
       },
       {
-        name: 'Дворец',
+        title: 'Дворец',
         description: 'который построил Джек',
-        photo: '../assets/places/place.jpeg',
-        coords: 'aaaaa'
+        image: '../assets/places/place.jpeg'
       },
       {
-        name: 'АД',
+        title: 'АД',
         description: 'который построил Джек',
-        photo: '../assets/places/place.jpeg',
-        coords: 'aaaaa'
+        image: '../assets/places/place.jpeg'
       }
     ];
   }

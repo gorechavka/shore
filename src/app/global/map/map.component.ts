@@ -38,17 +38,18 @@ export class MapComponent implements OnInit, OnDestroy {
       .subscribe(({ lat, lon }) => {
         try {
           this.mapService.navigateTo(this.map, [lat, lon]);
-          this.getAddress({ lat, lon }).subscribe(({ display_name }: Address) => {
-            this.mapService.setNewMark({
-              markers: this.markers,
-              coords: [lat, lon],
-              popup: display_name
-            });
-          });
+          // this.getAddress({ lat, lon }).subscribe(({ display_name }: Address) => {
+          //   this.mapService.changeMark({
+          //     markers: this.markers,
+          //     coords: [lat, lon],
+          //     popup: this.shortenAdress(display_name)
+          //   });
+          // });
+          this.setMark({ lat, lon });
           //create handleError function
         } catch (err) {
           console.log(err.message);
-          this.mapService.setDefaultLocation(this.map, this.markers);
+          return;
         }
       });
     this.listenClicks();
@@ -56,9 +57,17 @@ export class MapComponent implements OnInit, OnDestroy {
 
   listenClicks() {
     this.mapService.listen('click', this.map, ({ latlng: { lat, lng: lon } }) => {
-      this.getAddress({ lat, lon }).subscribe(({ display_name }) =>
-        this.mapService.changeMark({ markers: this.markers, coords: { lat, lon }, popup: display_name })
-      );
+      this.setMark({ lat, lon });
+    });
+  }
+
+  setMark({ lat, lon }) {
+    this.getAddress({ lat, lon }).subscribe(({ display_name }: Address) => {
+      this.mapService.changeMark({
+        markers: this.markers,
+        coords: [lat, lon],
+        popup: this.shortenAdress(display_name)
+      });
     });
   }
 
@@ -69,5 +78,9 @@ export class MapComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.unsubscribe();
+  }
+
+  shortenAdress(adress) {
+    return adress.split(',')[0] + ', ' + adress.split(',')[1];
   }
 }

@@ -18,7 +18,7 @@ export class PlaceCardComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.photo = `../assets/${this.place.photo}`;
+    this.photo = `../assets/${this.place.image}`;
   }
 
   showMore(name) {
