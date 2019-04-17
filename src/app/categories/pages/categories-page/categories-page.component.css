@@ -1,3 +1,8 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
 .categories__title {
   font-size: 2.7rem;
   margin-top: 40px;
@@ -8,6 +13,11 @@
 .next__btn {
   width: 80px;
   height: 80px;
-  justify-self: flex-end;
-  align-self: flex-end;
+  position: absolute;
+  bottom: 20px;
+  right: 250px;
+}
+
+.next__btn:hover {
+  filter: brightness(1.5)
 }

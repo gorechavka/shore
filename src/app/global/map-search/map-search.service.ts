@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { debounceTime, switchMap, map, catchError } from 'rxjs/operators';
 import { Observable, Subject, of } from 'rxjs';
-import { HttpService } from 'src/app/core/http-service/http.service';
-import { geoAddress } from 'src/app/models/geoAddress';
-import { Coords } from 'src/app/models/coords';
 import { Address } from '../../models/address';
+import { geoAddress } from '../../models/geoAddress';
+import { HttpService } from '../../core/http-service/http.service';
+import { Coords } from '../../models/coords';
 
 @Injectable({
   providedIn: 'root'

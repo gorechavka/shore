@@ -12,7 +12,9 @@
     "format:fix": "pretty-quick --staged",
     "********** Linters": "",
     "prettier": "prettier --config ./.prettierrc --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss}\"",
-    "prettier:fix": "prettier --config ./.prettierrc --write \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss}\""
+    "prettier:fix": "prettier --config ./.prettierrc --write \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss}\"",
+    "********** DB": "",
+    "populate-db": "./node_modules/.bin/ts-node --project ./src/utils/tsconfig.json ./src/utils/populate-db.ts"
   },
   "husky": {
     "hooks": {
@@ -45,6 +47,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
+    "firebase": "^5.9.4",
     "husky": "^1.3.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",

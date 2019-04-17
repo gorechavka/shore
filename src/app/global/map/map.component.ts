@@ -3,13 +3,8 @@ import { MapService } from './map.service';
 import { Coords } from '../../models/coords';
 import { MapSearchService } from '../map-search/map-search.service';
 import { Subject, Observable } from 'rxjs';
-import { takeUntil, map } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Address } from '../../models/address';
-
-interface Location {
-  long: number;
-  lat: number;
-}
 
 @Component({
   selector: 'app-map',
@@ -38,13 +33,6 @@ export class MapComponent implements OnInit, OnDestroy {
       .subscribe(({ lat, lon }) => {
         try {
           this.mapService.navigateTo(this.map, [lat, lon]);
-          // this.getAddress({ lat, lon }).subscribe(({ display_name }: Address) => {
-          //   this.mapService.changeMark({
-          //     markers: this.markers,
-          //     coords: [lat, lon],
-          //     popup: this.shortenAdress(display_name)
-          //   });
-          // });
           this.setMark({ lat, lon });
           //create handleError function
         } catch (err) {
@@ -62,6 +50,8 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   setMark({ lat, lon }) {
+    //сделать чтобы попап подгружался после того, как поставится отметка
+
     this.getAddress({ lat, lon }).subscribe(({ display_name }: Address) => {
       this.mapService.changeMark({
         markers: this.markers,

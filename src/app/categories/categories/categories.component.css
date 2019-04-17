@@ -4,7 +4,7 @@
   flex-wrap: wrap;
   width: 70vw;
   max-width: 100vw;
-  height: 75vh;
+  max-height: 70vh;
   margin: 40px auto;
   padding: 40px 10px;
   overflow: hidden;
@@ -24,9 +24,20 @@
   filter: grayscale(1) brightness(0.5)
 }
 
+.category__switch {
+  display: none;
+}
+
 .category:hover {
+  filter: grayscale(0.5) brightness(1)
+}
+
+.category__switch:checked+.category {
   filter: none;
 }
+
+
+
 
 .category__tip {
   display: inline-block;
@@ -43,15 +54,15 @@
   background: url(../../assets/imgs/coffee.png) no-repeat center;
 }
 
-.beer {
+.drinks {
   background: url(../../assets/imgs/beer.png) no-repeat center;
 }
 
-.clubs {
+.nightlife {
   background: url(../../assets/imgs/clubs.png) no-repeat center;
 }
 
-.movie {
+.movies {
   background: url(../../assets/imgs/movie.png) no-repeat center;
 }
 

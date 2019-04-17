@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Coords } from 'src/app/models/coords';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Place } from 'src/app/models/place';
+import { Coords } from '../../models/coords';
+import { Place } from '../../models/place';
 
 @Component({
   selector: 'app-create',

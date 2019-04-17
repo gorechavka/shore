@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Place } from 'src/app/models/place';
+import { Place } from '../../models/place';
 
 @Component({
   selector: 'app-place-list',
