@@ -1,24 +1,11 @@
-<!-- <a>
-  <div class="result m3">
-    <div class="card">
-      <div class="card-image">
-        <img [attr.src]="place.photo" width="200" alt="place">
-        <span class="card-title">{{place.title}}</span>
-        <a class="btn-floating halfway-fab show__btn " title="Узнать больше"></a>
-      </div>
-      <div class="card-content">
-        <p>{{place.description}}</p>
-      </div>
+<div class="result m3">
+  <div class="card">
+    <div class="card-image">
+      <img [attr.src]="place.image" width="200" alt="place">
+      <a class="btn-floating halfway-fab show__btn " title="Узнать больше" (click)="selectPlace(place.title)"></a>
     </div>
-  </div>
-</a> -->
-<!-- <router-outlet name='place'></router-outlet>
-<a [routerLink]="[{outlets : {place: ['place', place.name]}]"> -->
-<div class="col s12 m4" (click)="showMore(place.name)">
-  <div class="card purple darken-4">
-    <div class="card-content white-text">
-      <span class="card-title">{{place.name}}</span>
-      <p>{{place.description}}</p>
+    <div class=" card-content">
+      <span class="card-title">{{place.title}}</span>
     </div>
   </div>
 </div>

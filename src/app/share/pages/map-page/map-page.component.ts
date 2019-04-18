@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Coords } from '../../../models/coords';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-map-page',
@@ -7,10 +8,13 @@ import { Coords } from '../../../models/coords';
   styleUrls: ['./map-page.component.css']
 })
 export class MapPageComponent implements OnInit {
-  @Input() coords: Coords;
+  coords: Coords;
+  category: string;
 
   placeChoosen: boolean = false;
-  constructor() {}
+  constructor(private route: ActivatedRoute) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.category = this.route.snapshot.paramMap.get('category');
+  }
 }

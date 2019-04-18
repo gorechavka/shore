@@ -1,14 +1,14 @@
 <section class="place">
   <button class="btn close__btn" (click)="onCloseClick()"><i class="close material-icons">close</i></button>
   <div class="place__poster">
-    <img src="../imgs/photo.jpg" class="poster" alt="кросивое место">
+    <img [attr.src]="place.image" class="poster" alt="кросивое место">
     <button class="map__btn btn"></button>
   </div>
   <div class="place__info">
-    <h2 class="place__title">КРОСИВОЕ МЕСТО</h2>
+    <h2 class="place__title">{{place.title | uppercase}}</h2>
     <a class="place__author">
       <div class="author__photo" href="#">
-        <img src="../imgs/author.png" width="80px">
+        <img width="80px">
       </div>
       <div class="author__info">
         <div class="author__login"> Mr. Банан Дикий </div>
@@ -16,11 +16,12 @@
       </div>
     </a>
     <p class="place__description">
-      Очень красивое любимое место
+      <!-- Очень красивое любимое место
       всем советую посетить в ближайшем будущем
       вам понравится обещаю
       там плавают уточки и туман и
-      слушать сигур рос просто волшебно
+      слушать сигур рос просто волшебно -->
+      {{place.description}}
     </p>
     <div class="place__tags">
       <div class="chip">

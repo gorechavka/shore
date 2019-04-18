@@ -11,9 +11,8 @@
     </div>
   </nav>
   <button class="btn-large map__btn z-depth-3" title="Искать на карте"></button>
-
   <app-tags></app-tags>
-  <app-place-list></app-place-list>
+  <app-place-list [places]="(places|async)"></app-place-list>
   <button class="btn-floating arrow__btn btn-large" title="Показать больше"><i
       class="material-icons">keyboard_arrow_down</i></button>
 </main>

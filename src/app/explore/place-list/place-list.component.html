@@ -1,6 +1,4 @@
-<div class="row">
-  <ng-container *ngFor="let place of places">
-    <app-place-card [place]="place" (show)="selectedPlace = $event"></app-place-card>
-    <app-place [place]="place" *ngIf="selectedPlace === place.name" (hide)="selectedPlace = null"></app-place>
-  </ng-container>
-</div>
+<ng-container *ngFor="let place of places">
+  <app-place-card [place]="place" (select)="selectedPlace = $event"></app-place-card>
+  <app-place [place]="place" *ngIf="selectedPlace === place.title" (hide)="selectedPlace = null"></app-place>
+</ng-container>

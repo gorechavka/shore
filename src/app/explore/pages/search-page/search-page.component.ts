@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { Place } from '../../../models/place';
+import { StateService } from '../../../core/state-service/state.service';
+import { reduce, map, tap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search-page',
@@ -6,7 +11,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-page.component.css']
 })
 export class SearchPageComponent implements OnInit {
-  constructor() {}
+  places;
+  category: string;
 
-  ngOnInit() {}
+  constructor(private stateService: StateService, private route: ActivatedRoute) {
+    this.category = this.route.snapshot.paramMap.get('category');
+  }
+
+  ngOnInit() {
+    console.log('init search page');
+    console.log(this.category);
+    this.places = this.stateService.getState('places').pipe(
+      tap(places => console.log(places)),
+      map<Place[], any>(places => places.filter(place => place.category === this.category))
+    );
+  }
 }

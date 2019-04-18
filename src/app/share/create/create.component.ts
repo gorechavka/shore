@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Coords } from '../../models/coords';
 import { Place } from '../../models/place';
+import { Category } from '../../models/category';
 
 @Component({
   selector: 'app-create',
@@ -9,6 +10,7 @@ import { Place } from '../../models/place';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
+  @Input() category: Category;
   @Input() coords: Coords;
   @Output() close = new EventEmitter();
 
@@ -62,6 +64,7 @@ export class CreateComponent implements OnInit {
     }
 
     this.place = {
+      category: this.category,
       title: this.form.get('title').value,
       description: this.form.get('description').value,
       coords: this.coords,

@@ -9,7 +9,7 @@ import { Place } from '../../models/place';
 export class PlaceCardComponent implements OnInit {
   @Input() place: Place;
 
-  @Output() show = new EventEmitter<string>();
+  @Output() select = new EventEmitter<string>();
 
   photo: string;
   name: string;
@@ -21,7 +21,7 @@ export class PlaceCardComponent implements OnInit {
     this.photo = `../assets/${this.place.image}`;
   }
 
-  showMore(name) {
-    this.show.emit(name);
+  selectPlace(name) {
+    this.select.emit(name);
   }
 }

@@ -3,8 +3,8 @@
 </div>
 <div class="leaflet-top">
   <app-map-search (newCoords)="coords = $event"></app-map-search>
-  <div class="btn btn-large next__btn" title="Добавить место на карту" (click)="placeChosen = true">Добавить</div>
+  <div class="btn btn-large next__btn" title="Добавить место на карту" (click)="placeChosen = true">Share</div>
 </div>
 <div class="create__container leaflet-bottom">
-  <app-create [coords]="coords" *ngIf="placeChosen" (close)="placeChosen = false"></app-create>
+  <app-create [coords]="coords" [category]="category" *ngIf="placeChosen" (close)="placeChosen = false"></app-create>
 </div>
