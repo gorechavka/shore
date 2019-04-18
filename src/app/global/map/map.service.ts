@@ -36,17 +36,18 @@ export class MapService {
 
   changeMark({ markers, coords, popup = undefined }) {
     markers.clearLayers();
-    this.setNewMark({ markers, coords, popup });
+    return this.setNewMark({ markers, coords, popup });
   }
 
   setNewMark({ markers, coords, popup = undefined }) {
     const mark = L.marker(coords);
-    if (popup !== undefined) mark.bindPopup(popup).openPopup();
     markers.addLayer(mark);
+    return mark;
   }
 
-  // getAdress({lat, lon}){
-  // }
+  setPopup(mark, popup) {
+    mark.bindPopup(popup).openPopup();
+  }
 
   listen(event, map, handler) {
     map.on(event, handler);

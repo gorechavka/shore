@@ -5,7 +5,7 @@ export interface Place {
   category: Category;
   title: string;
   description: string;
-  image?: File | string;
+  image?: ArrayBuffer | string;
   coords?: Coords;
   id?: string | number;
 }

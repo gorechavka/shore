@@ -23,4 +23,12 @@ export class DatabaseService {
         this.stateService.setState(data);
       });
   }
+
+  addData(type: 'places' | 'coords', newData: Place | Coords) {
+    return this.afDatabase.list(type).push(newData);
+  }
+
+  changeData(type: 'places' | 'coords', key: string, newData: Place | Coords) {
+    this.afDatabase.list(type).update(key, newData);
+  }
 }

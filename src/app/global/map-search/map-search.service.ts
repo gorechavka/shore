@@ -5,7 +5,6 @@ import { Address } from '../../models/address';
 import { geoAddress } from '../../models/geoAddress';
 import { HttpService } from '../../core/http-service/http.service';
 import { Coords } from '../../models/coords';
-import { DatabaseService } from '../../core/db-service/database.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +14,7 @@ export class MapSearchService {
   BASE_URL: string = 'https://nominatim.openstreetmap.org/search?format=json';
   REVERSE_URL: string = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2';
 
-  constructor(private httpService: HttpService, private dbService: DatabaseService) {}
+  constructor(private httpService: HttpService) {}
 
   setQuery(input: string) {
     this.query$.next(input);

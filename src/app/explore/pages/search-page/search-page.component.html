@@ -10,7 +10,7 @@
       </form>
     </div>
   </nav>
-  <button class="btn-large map__btn z-depth-3" title="Искать на карте"></button>
+  <button class="btn-large map__btn z-depth-3" title="Искать на карте" (click)="openMap()"></button>
   <app-tags></app-tags>
   <app-place-list [places]="(places|async)"></app-place-list>
   <button class="btn-floating arrow__btn btn-large" title="Показать больше"><i

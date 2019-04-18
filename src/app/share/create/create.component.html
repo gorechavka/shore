@@ -2,7 +2,7 @@
   <button class="btn close__btn" (click)="onCloseClick()"><i class="close material-icons">close</i></button>
   <form enctype="multipart/form-data" method="POST" [formGroup]="form" (submit)="onSubmit($event)">
     <fieldset class="img__loader">
-      <img [attr.src]="form.get('poster').value" *ngIf="imageLoaded" class="image__preview">
+      <img [attr.src]="image" *ngIf="imageLoaded" class="image__preview">
       <input type="file" accept="image/*" id="poster" name="poster" formControlName="poster"
         (change)="onFileChange($event.target)">
       <label for="poster" class="btn-floating add-poster__btn" title="Добавить фото">
@@ -14,9 +14,11 @@
       <div class="title__loader">
         <input type="text" name="title" placeholder="Название" id="name" formControlName="title"
           [class.is-invalid]="titleInvalid">
+        <app-feedback *ngIf="titleInvalid" [control]="form.get('title')"></app-feedback>
       </div>
       <textarea name="decription" placeholder="Опишите ваше место" formControlName="description"
         [class.is-invalid]="descriptionInvalid"></textarea>
+      <app-feedback *ngIf="descriptionInvalid" [control]="form.get('description')"></app-feedback>
       <fieldset class="place__tags">
         <input type="text" name="tag" placeholder="Добавьте теги" id="tags">
         <button class="btn-floating add-tag__btn" title="Добавить тег">

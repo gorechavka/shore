@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { MapService } from './map.service';
 import { Coords } from '../../models/coords';
 import { MapSearchService } from '../map-search/map-search.service';
@@ -13,6 +13,7 @@ import { Address } from '../../models/address';
 })
 export class MapComponent implements OnInit, OnDestroy {
   @Input() coords: Coords;
+  @Output() newCoords = new EventEmitter<Coords>();
 
   map;
   markers: Array<any>;
@@ -26,6 +27,7 @@ export class MapComponent implements OnInit, OnDestroy {
     this.markers = this.mapService.createMarkers();
     this.map.addLayer(this.markers);
     this.mapService.setDefaultLocation(this.map, this.markers);
+
     //обработка ошибок!!! если ничего не найдено, ставить на дефолт и писать мол сорян
     this.mapSearchService
       .searchQuery()
@@ -40,37 +42,37 @@ export class MapComponent implements OnInit, OnDestroy {
           return;
         }
       });
+
     this.listenClicks();
   }
 
-  listenClicks() {
+  private setMark({ lat, lon }) {
+    const newMark = this.mapService.changeMark({
+      markers: this.markers,
+      coords: [lat, lon]
+    });
+    this.getAddress({ lat, lon }).subscribe(({ display_name }: Address) => {
+      this.mapService.setPopup(newMark, this.shortenAdress(display_name));
+    });
+  }
+
+  private getAddress(coords: Coords): Observable<Address> {
+    return this.mapSearchService.getAddress(coords).pipe(takeUntil(this.destroy$));
+  }
+
+  private listenClicks() {
     this.mapService.listen('click', this.map, ({ latlng: { lat, lng: lon } }) => {
       this.setMark({ lat, lon });
+      this.newCoords.emit({ lat, lon });
     });
   }
 
-  setMark({ lat, lon }) {
-    //сделать чтобы попап подгружался после того, как поставится отметка
-
-    this.getAddress({ lat, lon }).subscribe(({ display_name }: Address) => {
-      this.mapService.changeMark({
-        markers: this.markers,
-        coords: [lat, lon],
-        popup: this.shortenAdress(display_name)
-      });
-    });
-  }
-
-  getAddress(coords: Coords): Observable<Address> {
-    return this.mapSearchService.getAddress(coords).pipe(takeUntil(this.destroy$));
+  private shortenAdress(adress) {
+    return adress.split(',')[0] + ', ' + adress.split(',')[1];
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.unsubscribe();
-  }
-
-  shortenAdress(adress) {
-    return adress.split(',')[0] + ', ' + adress.split(',')[1];
   }
 }

@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { Place } from '../../../models/place';
 import { StateService } from '../../../core/state-service/state.service';
 import { reduce, map, tap } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-page',
@@ -14,7 +14,7 @@ export class SearchPageComponent implements OnInit {
   places;
   category: string;
 
-  constructor(private stateService: StateService, private route: ActivatedRoute) {
+  constructor(private stateService: StateService, private route: ActivatedRoute, private router: Router) {
     this.category = this.route.snapshot.paramMap.get('category');
   }
 
@@ -26,4 +26,6 @@ export class SearchPageComponent implements OnInit {
       map<Place[], any>(places => places.filter(place => place.category === this.category))
     );
   }
+
+  openMap() {}
 }

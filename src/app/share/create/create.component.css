@@ -54,7 +54,11 @@ form {
   border-radius: 0 0 500px 0;
   margin-left: -5px;
   padding: 0;
-  max-width: 50vh;
+  max-width: 60vh;
+}
+
+fieldset {
+  border: none;
 }
 
 .image__preview {
@@ -79,8 +83,8 @@ input[type='file'] {
 
 .add-poster__btn {
   position: absolute;
-  right: 190px;
-  bottom: 420px;
+  right: 220px;
+  bottom: 380px;
   width: 100px;
   height: 100px;
   background-color: rgba(255, 255, 255, 0.8);
@@ -122,8 +126,8 @@ input[type='file'] {
 
 #name.is-invalid,
 #name.is-invalid:focus {
-  border-bottom: 1px solid #d41b40;
-  box-shadow: 0 1px 0 0 #d41b40;
+  border-bottom: 1px solid #b3072c;
+  box-shadow: 0 1px 0 0 #b3072c;
 }
 
 .creator textarea {
@@ -141,7 +145,7 @@ input[type='file'] {
 
 .creator textarea.is-invalid,
 .creator textarea.is-invalid:focus {
-  border: 2px solid #e52240;
+  border: 2px solid #b3072c;
 }
 
 .place__tags {

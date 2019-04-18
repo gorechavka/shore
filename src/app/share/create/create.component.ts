@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Coords } from '../../models/coords';
 import { Place } from '../../models/place';
 import { Category } from '../../models/category';
+import { CreateService } from './create.service';
 
 @Component({
   selector: 'app-create',
@@ -16,15 +17,16 @@ export class CreateComponent implements OnInit {
 
   form: FormGroup;
   place: Place;
+  image: string | ArrayBuffer;
   imageLoaded: boolean;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private createService: CreateService) {}
 
   ngOnInit() {
     this.form = this.fb.group({
-      poster: ['', Validators.required],
-      title: ['', Validators.required],
-      description: ['', Validators.required]
+      poster: [''],
+      title: ['', [Validators.required, Validators.minLength(5)]],
+      description: ['', [Validators.required, Validators.maxLength(140)]]
     });
   }
 
@@ -36,13 +38,15 @@ export class CreateComponent implements OnInit {
     return this.form.get('description').invalid && this.form.get('description').touched;
   }
 
+  get posterInvalid() {
+    return this.form.get('poster').invalid && this.form.get('poster').touched;
+  }
+
   onFileChange(fileInput) {
     const reader = new FileReader();
     reader.addEventListener('load', _ => {
       this.imageLoaded = true;
-      this.form.patchValue({
-        poster: reader.result
-      });
+      this.image = reader.result;
     });
 
     if (fileInput.files && fileInput.files.length) {
@@ -51,7 +55,7 @@ export class CreateComponent implements OnInit {
     }
 
     reader.addEventListener('load', (event: any) => {
-      console.log(event.target.result);
+      console.log('image was loaded');
     });
   }
 
@@ -68,8 +72,19 @@ export class CreateComponent implements OnInit {
       title: this.form.get('title').value,
       description: this.form.get('description').value,
       coords: this.coords,
-      image: this.form.get('poster').value
+      image: this.image
     };
+
+    this.createService.addPlace(this.place);
+    this.createService.addCoords({ ...this.coords, place: this.place.title });
+    this.finish();
+  }
+
+  finish() {
+    this.imageLoaded = false;
+    this.image = null;
+    this.form.reset();
+    this.close.emit();
   }
 
   onCloseClick() {
