@@ -21,7 +21,7 @@ export class MapSearchService {
   }
 
   searchQuery() {
-    return this.query$.pipe(
+    return this.query$.asObservable().pipe(
       debounceTime(500),
       switchMap(query => this.getCoords(query))
     );

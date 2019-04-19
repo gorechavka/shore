@@ -17,11 +17,11 @@ import { environment } from '../environments/environment';
   declarations: [AppComponent, HomeComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
     ShareModule,
     ExploreModule,
     CategoriesModule,
+    AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     // AngularFireAuthModule,
     AngularFireDatabaseModule

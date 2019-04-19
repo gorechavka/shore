@@ -6,6 +6,9 @@ import { PlaceListComponent } from './place-list/place-list.component';
 import { TagsComponent } from './tags/tags.component';
 import { TagComponent } from './tag/tag.component';
 import { PlaceComponent } from './place/place.component';
+import { MapModule } from '../global/map/map.module';
+import { MapSearchModule } from '../global/map-search/map-search.module';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -14,8 +17,9 @@ import { PlaceComponent } from './place/place.component';
     PlaceListComponent,
     TagsComponent,
     TagComponent,
-    PlaceComponent
+    PlaceComponent,
+    SearchComponent
   ],
-  imports: [CommonModule]
+  imports: [CommonModule, MapModule, MapSearchModule]
 })
 export class ExploreModule {}

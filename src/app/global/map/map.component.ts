@@ -13,6 +13,7 @@ import { Address } from '../../models/address';
 })
 export class MapComponent implements OnInit, OnDestroy {
   @Input() coords: Coords;
+  @Input() clickable: boolean;
   @Output() newCoords = new EventEmitter<Coords>();
 
   map;
@@ -43,9 +44,17 @@ export class MapComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.listenClicks();
+    if (this.clickable) {
+      this.listenClicks();
+    }
   }
 
+  listenClicks() {
+    this.mapService.listen('click', this.map, ({ latlng: { lat, lng: lon } }) => {
+      this.setMark({ lat, lon });
+      this.newCoords.emit({ lat, lon });
+    });
+  }
   private setMark({ lat, lon }) {
     const newMark = this.mapService.changeMark({
       markers: this.markers,
@@ -58,13 +67,6 @@ export class MapComponent implements OnInit, OnDestroy {
 
   private getAddress(coords: Coords): Observable<Address> {
     return this.mapSearchService.getAddress(coords).pipe(takeUntil(this.destroy$));
-  }
-
-  private listenClicks() {
-    this.mapService.listen('click', this.map, ({ latlng: { lat, lng: lon } }) => {
-      this.setMark({ lat, lon });
-      this.newCoords.emit({ lat, lon });
-    });
   }
 
   private shortenAdress(adress) {

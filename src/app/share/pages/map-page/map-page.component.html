@@ -1,5 +1,5 @@
 <div class="map__container" id="map">
-  <app-map (newCoords)="coords = $event"></app-map>
+  <app-map (newCoords)="coords = $event" [clickable]="true"></app-map>
 </div>
 <div class=" leaflet-top">
   <app-map-search (newCoords)="coords = $event"></app-map-search>
