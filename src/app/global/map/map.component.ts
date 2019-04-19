@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { MapService } from './map.service';
 import { Coords } from '../../models/coords';
 import { MapSearchService } from '../map-search/map-search.service';
@@ -13,6 +13,7 @@ import { Address } from '../../models/address';
 })
 export class MapComponent implements OnInit, OnDestroy {
   @Input() coords: Coords;
+  // @Input() places: { coords; title }[];
   @Input() clickable: boolean;
   @Output() newCoords = new EventEmitter<Coords>();
 
@@ -25,10 +26,9 @@ export class MapComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.map = this.mapService.createMap('map');
-    this.markers = this.mapService.createMarkers();
+    this.markers = this.mapService.createMarkersCluster();
     this.map.addLayer(this.markers);
     this.mapService.setDefaultLocation(this.map, this.markers);
-
     //обработка ошибок!!! если ничего не найдено, ставить на дефолт и писать мол сорян
     this.mapSearchService
       .searchQuery()
@@ -55,14 +55,26 @@ export class MapComponent implements OnInit, OnDestroy {
       this.newCoords.emit({ lat, lon });
     });
   }
-  private setMark({ lat, lon }) {
+
+  setPlaces(places) {
+    if (!places || !this.map) return;
+    const markers = this.mapService.createMarksGroup(places.map(({ coords, title }) => ({ coords, popup: title })));
+    const cluster = this.mapService.createMarkersCluster();
+    cluster.addLayers(markers);
+    console.log(markers);
+    this.map.addLayer(cluster);
+  }
+
+  private setMark({ lat, lon }, popup?: string) {
     const newMark = this.mapService.changeMark({
       markers: this.markers,
       coords: [lat, lon]
     });
-    this.getAddress({ lat, lon }).subscribe(({ display_name }: Address) => {
-      this.mapService.setPopup(newMark, this.shortenAdress(display_name));
-    });
+    if (popup === undefined) {
+      this.getAddress({ lat, lon }).subscribe(({ display_name }: Address) => {
+        this.mapService.setPopup(newMark, this.shortenAdress(display_name));
+      });
+    }
   }
 
   private getAddress(coords: Coords): Observable<Address> {

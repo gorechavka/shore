@@ -17,6 +17,5 @@ export class AppComponent implements OnInit {
     if (!firebase.apps.length) {
       firebase.initializeApp({});
     }
-    this.dbService.init();
   }
 }

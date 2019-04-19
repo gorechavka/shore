@@ -7,12 +7,10 @@ import { map, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class StateService {
-  private lastState: State = {
-    places: [],
-    coords: []
-  };
-
-  private state$ = new BehaviorSubject<State>(this.lastState);
+  private state$ = new BehaviorSubject<State>({
+    coords: [],
+    places: []
+  });
 
   constructor() {}
 
@@ -22,7 +20,7 @@ export class StateService {
         if (type === undefined) {
           return curState;
         }
-        console.log(` get state ${curState}`);
+        console.log(` get state`);
         return curState[type];
       })
       // catchError(err => this.handleError(err))
@@ -30,13 +28,7 @@ export class StateService {
   }
 
   setState(newState, type?: string) {
-    console.log(`set state ${newState}`);
-    if (type === undefined) {
-      this.lastState = <State>newState;
-      this.state$.next(<State>newState);
-    } else {
-      this.lastState[type] = newState;
-      this.state$.next({ ...this.lastState });
-    }
+    this.state$.next(newState);
+    console.log('set new state');
   }
 }

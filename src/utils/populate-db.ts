@@ -1,6 +1,6 @@
 import { database, initializeApp } from 'firebase';
 import { environment } from '../environments/environment';
-import { categories } from './categories';
+import { places } from './places-db';
 
 initializeApp(environment.firebaseConfig);
 
@@ -16,17 +16,11 @@ async function populate(name: string, data: any[]): Promise<any> {
   return Promise.all(promises);
 }
 
-async function populateAll(categories) {
-  let counter = 0;
-  let length = Object.keys(categories).length;
-  for (let c in categories) {
-    populate(c, categories[c]).then(_ => {
-      if (++counter >= length) {
-        console.log('🔥 db populated 🔥');
-        process.exit();
-      }
-    });
-  }
+async function populateAll() {
+  await populate('places', places);
+
+  console.log('🔥 db populated 🔥');
+  process.exit();
 }
 
-populateAll(categories);
+populateAll();

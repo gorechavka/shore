@@ -34,10 +34,11 @@
   padding: 10px 20px;
   box-sizing: border-box;
   background-color: white;
+  min-height: 70vh;
 }
 
 .place__poster {
-  width: 45%;
+  width: 50%;
   max-height: 100%;
   position: relative;
   border-radius: 150px 0 200px 150px;
@@ -69,7 +70,7 @@
 .place .map__btn {
   position: absolute;
   bottom: 50px;
-  right: 80px;
+  right: 100px;
 }
 
 .map__btn:hover {

@@ -23,6 +23,8 @@ export class MapSearchComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (coords: Coords) => {
+          //обработка ошибок!!!
+          if (coords.lat === undefined || coords.lon === undefined) return;
           this.newCoords.emit(coords);
         },
         err => console.log(err)

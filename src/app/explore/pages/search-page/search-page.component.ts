@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 })
 export class SearchPageComponent implements OnInit {
   places: Observable<Place[]>;
+  filteredPlaces: Observable<Place[]>;
   category: string;
 
   constructor(private stateService: StateService, private route: ActivatedRoute, private countService: CountService) {
@@ -25,10 +26,13 @@ export class SearchPageComponent implements OnInit {
       tap(places => console.log(places)),
       map<Place[], any>(places => places.filter(place => place.category === this.category))
     );
+    this.filteredPlaces = this.places;
   }
 
   onNewCoords(coords: Coords) {
-    this.places = this.places.pipe(map(places => places.filter(place => this.checkNeighborhood(place.coords, coords))));
+    this.filteredPlaces = this.places.pipe(
+      map(places => places.filter(place => this.checkNeighborhood(place.coords, coords)))
+    );
   }
 
   private checkNeighborhood(current: Coords, target: Coords, dist: number = 3) {

@@ -16,7 +16,7 @@ export class MapService {
     return map;
   }
 
-  createMarkers() {
+  createMarkersCluster() {
     return L.markerClusterGroup({
       spiderfyOnMaxZoom: true,
       showCoverageOnHover: false,
@@ -43,6 +43,15 @@ export class MapService {
     const mark = L.marker(coords);
     markers.addLayer(mark);
     return mark;
+  }
+
+  createMarksGroup(markers) {
+    return markers.map(({ coords, popup }) => {
+      console.log(coords);
+      const mark = L.marker(coords);
+      mark.bindPopup(popup);
+      return mark;
+    });
   }
 
   setPopup(mark, popup) {

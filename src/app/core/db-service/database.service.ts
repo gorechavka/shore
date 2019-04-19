@@ -9,10 +9,12 @@ import { Coords } from '../../models/coords';
   providedIn: 'root'
 })
 export class DatabaseService {
-  constructor(private stateService: StateService, private afDatabase: AngularFireDatabase) {}
+  constructor(private stateService: StateService, private afDatabase: AngularFireDatabase) {
+    this.init();
+  }
 
   init() {
-    console.log('init db');
+    console.log('start getting data');
     this.afDatabase
       .object('/')
       .valueChanges()
@@ -20,6 +22,7 @@ export class DatabaseService {
         for (let type in data) {
           data[type] = Object.keys(data[type]).map(id => data[type][id]);
         }
+        console.log('start setting data');
         this.stateService.setState(data);
       });
   }
