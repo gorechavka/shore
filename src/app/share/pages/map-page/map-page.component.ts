@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Coords } from '../../../models/coords';
 import { ActivatedRoute } from '@angular/router';
 import { Place } from '../../../models/place';
 import { StateService } from '../../../core/state-service/state.service';
 import { MapComponent } from '../../../global/map/map.component';
-import { map } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-map-page',
@@ -15,6 +16,8 @@ export class MapPageComponent implements OnInit, AfterViewInit {
   coords: Coords;
   category: string;
   places: { coords; title }[];
+
+  private destroy$ = new Subject<boolean>();
 
   @ViewChild(MapComponent) mapComponent: MapComponent;
 
@@ -29,6 +32,7 @@ export class MapPageComponent implements OnInit, AfterViewInit {
     this.stateService
       .getState('places')
       .pipe(
+        takeUntil(this.destroy$),
         map((places: Place[]) =>
           places.reduce((acc, { category, coords, title }) => {
             if (category == this.category) {
@@ -39,5 +43,10 @@ export class MapPageComponent implements OnInit, AfterViewInit {
         )
       )
       .subscribe(places => this.mapComponent.setPlaces(places));
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }
