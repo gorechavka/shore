@@ -6,6 +6,7 @@ import { StateService } from '../../../core/state-service/state.service';
 import { MapComponent } from '../../../global/map/map.component';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { Category } from '../../../models/category';
 
 @Component({
   selector: 'app-map-page',
@@ -14,7 +15,7 @@ import { Subject } from 'rxjs';
 })
 export class MapPageComponent implements OnInit, AfterViewInit {
   coords: Coords;
-  category: string;
+  category: Category;
   places: { coords; title }[];
 
   private destroy$ = new Subject<boolean>();
@@ -25,7 +26,7 @@ export class MapPageComponent implements OnInit, AfterViewInit {
   constructor(private route: ActivatedRoute, private stateService: StateService) {}
 
   ngOnInit() {
-    this.category = this.route.snapshot.paramMap.get('category');
+    this.category = <Category>this.route.snapshot.paramMap.get('category');
   }
 
   ngAfterViewInit(): void {
@@ -42,7 +43,10 @@ export class MapPageComponent implements OnInit, AfterViewInit {
           }, [])
         )
       )
-      .subscribe(places => this.mapComponent.setPlaces(places));
+      .subscribe(places => {
+        console.log('set places');
+        this.mapComponent.setPlaces(places, this.category);
+      });
   }
 
   ngOnDestroy(): void {

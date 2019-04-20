@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DatabaseService } from '../../core/db-service/database.service';
 import { Place } from '../../models/place';
-import { Coords } from '../../models/coords';
 
 @Injectable({
   providedIn: 'root'
@@ -9,16 +8,15 @@ import { Coords } from '../../models/coords';
 export class CreateService {
   constructor(private dbService: DatabaseService) {}
 
-  addPlace(place: Place, successHandler?, errorHandler?) {
-    this.dbService
+  addPlace(place: Place, errorHandler?): Promise<string | void> {
+    return this.dbService
       .addData('places', place)
-      .then(_ => this.handleSuccess(successHandler), err => this.handleError(errorHandler, err));
+      .then(ref => Promise.resolve(ref.key))
+      .catch(err => this.handleError(err, errorHandler));
   }
 
-  addCoords(coords: Coords, successHandler?, errorHandler?) {
-    this.dbService
-      .addData('coords', coords)
-      .then(_ => this.handleSuccess(successHandler), err => this.handleError(errorHandler, err));
+  addImage(image: string | ArrayBuffer, id: string) {
+    this.dbService.addData('images', { image }, id);
   }
 
   handleSuccess(handler?: () => void) {

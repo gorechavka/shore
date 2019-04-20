@@ -22,10 +22,9 @@ export class SearchPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.places = this.stateService.getState('places').pipe(
-      tap(places => console.log(places)),
-      map<Place[], any>(places => places.filter(place => place.category === this.category))
-    );
+    this.places = this.stateService
+      .getState('places')
+      .pipe(map<Place[], any>(places => places.filter(place => place.category === this.category)));
     this.filteredPlaces = this.places;
   }
 

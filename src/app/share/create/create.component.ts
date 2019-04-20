@@ -76,7 +76,9 @@ export class CreateComponent implements OnInit {
     };
 
     this.createService.addPlace(this.place);
-    this.createService.addCoords({ ...this.coords, place: this.place.title });
+    //если решу хранить и подгружать картинки отдельно
+    // .then(id => this.createService.addImage(this.image, <string>id));
+    // this.createService.addImage(this.image, id????);
     this.finish();
   }
 

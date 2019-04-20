@@ -20,18 +20,22 @@ export class DatabaseService {
       .valueChanges()
       .subscribe((data: State) => {
         for (let type in data) {
-          data[type] = Object.keys(data[type]).map(id => data[type][id]);
+          data[type] = Object.keys(data[type]).map(id => ({ ...data[type][id], id }));
         }
         console.log('start setting data');
         this.stateService.setState(data);
       });
   }
 
-  addData(type: 'places' | 'coords', newData: Place | Coords) {
+  addData(type: 'places' | 'images', newData: Place | { image: ArrayBuffer | string }, id?: string) {
+    //затестить
+    if (id !== undefined) {
+      return this.afDatabase.list(`${type}/${id}`).push(newData);
+    }
     return this.afDatabase.list(type).push(newData);
   }
 
-  changeData(type: 'places' | 'coords', key: string, newData: Place | Coords) {
+  changeData(type: 'places' | 'images', key: string, newData: Place | Coords) {
     this.afDatabase.list(type).update(key, newData);
   }
 }

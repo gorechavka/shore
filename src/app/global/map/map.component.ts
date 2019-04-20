@@ -5,6 +5,7 @@ import { MapSearchService } from '../map-search/map-search.service';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Address } from '../../models/address';
+import { Category } from '../../models/category';
 
 @Component({
   selector: 'app-map',
@@ -13,7 +14,6 @@ import { Address } from '../../models/address';
 })
 export class MapComponent implements OnInit, OnDestroy {
   @Input() coords: Coords;
-  // @Input() places: { coords; title }[];
   @Input() clickable: boolean;
   @Output() newCoords = new EventEmitter<Coords>();
 
@@ -56,9 +56,12 @@ export class MapComponent implements OnInit, OnDestroy {
     });
   }
 
-  setPlaces(places) {
+  setPlaces(places, category: Category) {
     if (!places || !this.map) return;
-    const markers = this.mapService.createMarksGroup(places.map(({ coords, title }) => ({ coords, popup: title })));
+    const markers = this.mapService.createMarksGroup(
+      places.map(({ coords, title }) => ({ coords, popup: title })),
+      category
+    );
     const cluster = this.mapService.createMarkersCluster();
     cluster.addLayers(markers);
     console.log(markers);

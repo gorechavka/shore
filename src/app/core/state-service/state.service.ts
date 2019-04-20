@@ -14,7 +14,7 @@ export class StateService {
 
   constructor() {}
 
-  getState(type?: string): Observable<any> {
+  getState(type?: 'places' | 'images'): Observable<any> {
     return this.state$.asObservable().pipe(
       map(curState => {
         if (type === undefined) {
@@ -27,8 +27,8 @@ export class StateService {
     );
   }
 
-  setState(newState, type?: string) {
+  setState(newState) {
     this.state$.next(newState);
-    console.log('set new state');
+    console.log(newState);
   }
 }
