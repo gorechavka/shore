@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Category } from '../../models/category';
 declare const L;
 
 const icons = {
-  food: require('./icons/food.png'),
-  drinks: require('./icons/beer.png'),
-  coffee: require('./icons/coffee.png'),
-  nightlife: require('./icons/disco.png'),
-  movies: require('./icons/movie.png'),
-  music: require('./icons/music.png'),
-  nature: require('./icons/nature.png'),
-  other: require('./icons/clown.png'),
-  location: require('./icons/location.png')
+  food: require('./icons/foodI.png'),
+  drinks: require('./icons/beerI.png'),
+  coffee: require('./icons/coffeeI.png'),
+  nightlife: require('./icons/discoI.png'),
+  movies: require('./icons/movieI.png'),
+  music: require('./icons/musicI.png'),
+  nature: require('./icons/natureI.png'),
+  other: require('./icons/clownI.png'),
+  location: require('./icons/locationI.png')
 };
 
 @Injectable({
@@ -23,11 +22,11 @@ export class MapIconService {
     this.PlaceIcon = L.Icon.extend({
       options: {
         shadowUrl: '',
-        iconSize: [38, 38],
+        iconSize: [42, 42],
         shadowSize: [0, 0],
-        iconAnchor: [19, 37],
+        iconAnchor: [21, 40],
         shadowAnchor: [0, 0],
-        popupAnchor: [0, -36]
+        popupAnchor: [0, -40]
       }
     });
   }

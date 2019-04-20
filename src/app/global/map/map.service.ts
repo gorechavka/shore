@@ -13,7 +13,7 @@ export class MapService {
     const map = L.map(div);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      maxZoom: 18
+      maxZoom: 20
     }).addTo(map);
     return map;
   }
@@ -27,7 +27,7 @@ export class MapService {
   }
 
   setDefaultLocation(map, markers) {
-    map.locate({ setView: true, maxZoom: 13, maximumAge: 1000 });
+    map.locate({ setView: true, maxZoom: 15, maximumAge: 1000 });
     map.on('locationerror', err => console.log(err.code));
     map.on('locationfound', _ => {
       const marker = this.changeMark({ markers, coords: map.getCenter() });
@@ -36,7 +36,7 @@ export class MapService {
   }
 
   navigateTo(map, coords: number[]) {
-    map.setView(coords, 14);
+    map.setView(coords, 16);
   }
 
   changeMark({ markers, coords, popup = undefined }, category?: string) {
