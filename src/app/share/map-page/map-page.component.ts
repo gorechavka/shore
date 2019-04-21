@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { Coords } from '../../../models/coords';
+import { Coords } from '../../models/coords';
 import { ActivatedRoute } from '@angular/router';
-import { Place } from '../../../models/place';
-import { StateService } from '../../../core/state-service/state.service';
-import { MapComponent } from '../../../global/map/map.component';
+import { Place } from '../../models/place';
+import { StateService } from '../../core/state-service/state.service';
+import { MapComponent } from '../../global/map/map.component';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { Category } from '../../../models/category';
+import { Category } from '../../models/category';
 
 @Component({
   selector: 'app-map-page',
@@ -22,7 +22,7 @@ export class MapPageComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MapComponent) mapComponent: MapComponent;
 
-  placeChoosen: boolean = false;
+  placeToShow: Place;
   constructor(private route: ActivatedRoute, private stateService: StateService) {}
 
   ngOnInit() {
@@ -35,9 +35,9 @@ export class MapPageComponent implements OnInit, AfterViewInit {
       .pipe(
         takeUntil(this.destroy$),
         map((places: Place[]) =>
-          places.reduce((acc, { category, coords, title }) => {
-            if (category == this.category) {
-              acc.push({ coords, title });
+          places.reduce((acc, place: Place) => {
+            if (place.category == this.category) {
+              acc.push(place);
             }
             return acc;
           }, [])
@@ -47,6 +47,10 @@ export class MapPageComponent implements OnInit, AfterViewInit {
         console.log('set places');
         this.mapComponent.setPlaces(places, this.category);
       });
+  }
+
+  showPlace(place) {
+    this.placeToShow = place;
   }
 
   ngOnDestroy(): void {

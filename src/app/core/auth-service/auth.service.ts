@@ -42,7 +42,6 @@ export class AuthService {
 
   emailSignup(login: string, email: string, password: string): Promise<Error | void> {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(user => {
-      this.redirect();
       return this.addUser(user.user.uid, { email, login, password });
     });
   }
@@ -58,7 +57,7 @@ export class AuthService {
     this.dbService.changeData('users', uid, { email, login, password });
   }
 
-  private redirect() {
+  redirect() {
     this.router.navigate([this._redirectUrl]);
   }
 }

@@ -2,7 +2,7 @@
   <ng-container *ngFor="let category of categories">
     <input type="radio" class="category__switch" name="switch" [attr.id]="category">
     <label [ngClass]="['category', 'z-depth-3', category]" (click)="chooseCategory(category)" [attr.for]="category">
-      <span class="category__tip">{{category | uppercase}}</span>
+      <span class="category__tip">{{names[category] | uppercase}}</span>
     </label>
   </ng-container>
 

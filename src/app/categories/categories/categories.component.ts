@@ -1,6 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
-const coffeeI = require('../../assets/imgs/coffee.png');
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-categories',
@@ -9,7 +7,17 @@ const coffeeI = require('../../assets/imgs/coffee.png');
 })
 export class CategoriesComponent implements OnInit {
   @Output() choose = new EventEmitter<string>();
-  categories: string[] = ['food', 'coffee', 'drinks', 'nightlife', 'nature', 'music', 'movies', 'other'];
+  categories: string[] = ['food', 'coffee', 'drinks', 'nightlife', 'nature', 'art', 'movies', 'other'];
+  names = {
+    food: 'Food',
+    coffee: 'Coffee&tea',
+    drinks: 'Drinks',
+    nightlife: 'Nightlife',
+    nature: 'Nature',
+    art: 'Art&culture',
+    movies: 'Cinema',
+    other: 'Other'
+  };
 
   constructor() {}
 

@@ -7,7 +7,7 @@ const icons = {
   coffee: require('./icons/coffeeI.png'),
   nightlife: require('./icons/discoI.png'),
   movies: require('./icons/movieI.png'),
-  music: require('./icons/musicI.png'),
+  art: require('./icons/artI.png'),
   nature: require('./icons/natureI.png'),
   other: require('./icons/clownI.png'),
   location: require('./icons/locationI.png')
@@ -26,7 +26,7 @@ export class MapIconService {
         shadowSize: [0, 0],
         iconAnchor: [21, 40],
         shadowAnchor: [0, 0],
-        popupAnchor: [0, -40]
+        tooltipAnchor: [21, -30]
       }
     });
   }

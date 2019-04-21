@@ -18,7 +18,13 @@ export class SigninComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.auth.isLoggedIn$.subscribe(isLoggedIn => {
+      if (isLoggedIn) {
+        this.auth.redirect();
+      }
+    });
+  }
 
   get emailInvalid() {
     return this._checkErrors('email');

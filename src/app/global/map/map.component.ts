@@ -6,6 +6,7 @@ import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Address } from '../../models/address';
 import { Category } from '../../models/category';
+import { Place } from '../../models/place';
 
 @Component({
   selector: 'app-map',
@@ -16,6 +17,7 @@ export class MapComponent implements OnInit, OnDestroy {
   @Input() coords: Coords;
   @Input() clickable: boolean;
   @Output() newCoords = new EventEmitter<Coords>();
+  @Output() choosenPlace = new EventEmitter<Place>();
 
   map;
   markers: Array<any>;
@@ -59,25 +61,36 @@ export class MapComponent implements OnInit, OnDestroy {
   setPlaces(places, category: Category) {
     if (!places || !this.map) return;
     const markers = this.mapService.createMarksGroup(
-      places.map(({ coords, title }) => ({ coords, popup: title })),
+      places.map(({ coords, title }) => ({ coords, tooltip: title })),
       category
     );
+
+    this.bindPlaces(markers, places);
+
     const cluster = this.mapService.createMarkersCluster();
     cluster.addLayers(markers);
-    console.log(markers);
     this.map.addLayer(cluster);
   }
 
-  private setMark({ lat, lon }, popup?: string) {
+  private setMark({ lat, lon }, tooltip?: string) {
     const newMark = this.mapService.changeMark({
       markers: this.markers,
       coords: [lat, lon]
     });
-    if (popup === undefined) {
+    if (tooltip === undefined) {
       this.getAddress({ lat, lon }).subscribe(({ display_name }: Address) => {
-        this.mapService.setPopup(newMark, this.shortenAdress(display_name));
+        this.mapService.setTooltip(newMark, this.shortenAdress(display_name));
       });
     }
+  }
+
+  private bindPlaces(markers, places) {
+    markers.forEach(marker => {
+      marker.on('click', ({ latlng }) => {
+        const place = places.find(({ coords }: Place) => coords.lat == latlng.lat && coords.lon == latlng.lng);
+        if (place) this.choosenPlace.emit(place);
+      });
+    });
   }
 
   private getAddress(coords: Coords): Observable<Address> {

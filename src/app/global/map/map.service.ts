@@ -31,7 +31,7 @@ export class MapService {
     map.on('locationerror', err => console.log(err.code));
     map.on('locationfound', _ => {
       const marker = this.changeMark({ markers, coords: map.getCenter() });
-      this.setPopup(marker, 'Вы здесь');
+      this.setTooltip(marker, 'Вы здесь');
     });
   }
 
@@ -39,27 +39,31 @@ export class MapService {
     map.setView(coords, 16);
   }
 
-  changeMark({ markers, coords, popup = undefined }, category?: string) {
+  changeMark({ markers, coords, tooltip = undefined }, category?: string) {
     markers.clearLayers();
-    return this.setNewMark({ markers, coords, popup }, category);
+    return this.setNewMark({ markers, coords, tooltip }, category);
   }
 
-  setNewMark({ markers, coords, popup = undefined }, category: string) {
+  setNewMark({ markers, coords, tooltip = undefined }, category: string) {
     const mark = L.marker(coords, { icon: this.mapIconService.createPlaceIcon(category) });
     markers.addLayer(mark);
     return mark;
   }
 
   createMarksGroup(markers, category: string) {
-    return markers.map(({ coords, popup }) => {
+    return markers.map(({ coords, tooltip }) => {
       const mark = L.marker(coords, { icon: this.mapIconService.createPlaceIcon(category) });
-      mark.bindPopup(popup);
+      mark.bindTooltip(tooltip);
       return mark;
     });
   }
 
-  setPopup(mark, popup) {
-    mark.bindPopup(popup).openPopup();
+  setTooltip(mark, tooltip) {
+    mark.bindTooltip(tooltip);
+  }
+
+  openTooltip(mark) {
+    mark.openTooltip();
   }
 
   listen(event, map, handler) {
