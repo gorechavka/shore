@@ -1,0 +1,20 @@
+<form [formGroup]="form" (keydown.enter)="onSubmit()">
+  <div class="input-field">
+    <i class="material-icons prefix">email</i>
+    <input type="email" formControlName="email" [class.is-invalid]="emailInvalid" class="input" placeholder="Email"
+      id="email">
+    <app-feedback [control]="form.get('email')"></app-feedback>
+  </div>
+  <div class="input-field">
+    <i class="material-icons prefix">lock_outline</i>
+    <input type="password" formControlName="password" [class.is-invalid]="passwordInvalid" class="input"
+      placeholder="Password" id="password">
+  </div>
+  <app-feedback [control]="form.get('password')"></app-feedback>
+  <button type="button" class="btn auth__btn" [disabled]="form.invalid" (click)="onSubmit($event)">
+    Войти
+  </button>
+  <button type="button" class="btn auth__btn" (click)="onRegistrationClick()">
+    Регистрация
+  </button>
+</form>

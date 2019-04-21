@@ -15,10 +15,6 @@ export class CreateService {
       .catch(err => this.handleError(err, errorHandler));
   }
 
-  addImage(image: string | ArrayBuffer, id: string) {
-    this.dbService.addData('images', { image }, id);
-  }
-
   handleSuccess(handler?: () => void) {
     if (handler !== undefined) {
       handler();

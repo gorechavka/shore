@@ -50,7 +50,7 @@ form {
   flex-grow: 1;
   background: url('../../assets/imgs/walk.jpg') no-repeat;
   background-size: cover;
-  filter: grayscale(0.3) opacity(0.9);
+  filter: grayscale(0.3) opacity(0.95);
   border-radius: 0 0 500px 0;
   margin-left: -5px;
   padding: 0;

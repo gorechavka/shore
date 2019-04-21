@@ -1,0 +1,3 @@
+<h3>Прежде чем поделиться местом, представьтесь, пожалуйста! :)</h3>
+<app-signin *ngIf='isRegistered' (registrationRequest)="isRegistered = false"></app-signin>
+<app-signup *ngIf='!isRegistered'></app-signup>

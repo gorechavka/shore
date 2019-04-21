@@ -1,3 +1,3 @@
 <h2 class="categories__title">ВЫБЕРИТЕ КАТЕГОРИЮ</h2>
 <app-categories (choose)="onCategoryChoose($event)"></app-categories>
-<button class="btn-floating purple darken-4 next__btn" (click)="goNext()">Далее</button>
+<button class="btn-floating purple darken-4 next__btn" [disabled]="!category" (click)="goNext()">Далее</button>

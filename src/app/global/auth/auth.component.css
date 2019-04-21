@@ -1,0 +1,20 @@
+:host {
+  width: 70vw;
+  display: block;
+  margin: auto;
+}
+
+.auth__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  border-radius: 30px;
+  background-color: #492B8C;
+  color: white;
+}
+
+.auth__btn:hover {
+  background-color: transparent;
+  color: #492B8C;
+}

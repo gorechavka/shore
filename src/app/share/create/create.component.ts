@@ -26,7 +26,7 @@ export class CreateComponent implements OnInit {
     this.form = this.fb.group({
       poster: [''],
       title: ['', [Validators.required, Validators.minLength(5)]],
-      description: ['', [Validators.required, Validators.maxLength(140)]]
+      description: ['', [Validators.required]]
     });
   }
 

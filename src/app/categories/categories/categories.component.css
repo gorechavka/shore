@@ -47,33 +47,33 @@
 }
 
 .food {
-  background: url(../../assets/imgs/food.png) no-repeat center;
+  background: url('../../assets/imgs/food.png') no-repeat center;
 }
 
 .coffee {
-  background: url(../../assets/imgs/coffee.png) no-repeat center;
+  background: url('../../assets/imgs/coffee.png') no-repeat center;
 }
 
 .drinks {
-  background: url(../../assets/imgs/beer.png) no-repeat center;
+  background: url('../../assets/imgs/beer.png') no-repeat center;
 }
 
 .nightlife {
-  background: url(../../assets/imgs/clubs.png) no-repeat center;
+  background: url('../../assets/imgs/clubs.png') no-repeat center;
 }
 
 .movies {
-  background: url(../../assets/imgs/movie.png) no-repeat center;
+  background: url('../../assets/imgs/movie.png') no-repeat center;
 }
 
 .nature {
-  background: url(../../assets/imgs/nature.png) no-repeat center;
+  background: url('../../assets/imgs/nature.png') no-repeat center;
 }
 
 .other {
-  background: url(../../assets/imgs/fun.png) no-repeat center;
+  background: url('../../assets/imgs/fun.png') no-repeat center;
 }
 
 .music {
-  background: url(../../assets/imgs/music.png) no-repeat center;
+  background: url('../../assets/imgs/music.png') no-repeat center;
 }

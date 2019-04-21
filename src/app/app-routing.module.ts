@@ -5,13 +5,26 @@ import { CategoriesPageComponent } from './categories/pages/categories-page/cate
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MapPageComponent } from './share/pages/map-page/map-page.component';
 import { SearchPageComponent } from './explore/pages/search-page/search-page.component';
+import { AuthGuard } from './core/auth-service/auth.guard';
+import { AuthComponent } from './global/auth/auth.component';
 
 const routes: Routes = [
-  { path: 'categories/:action', component: CategoriesPageComponent },
-  { path: 'share/:category', component: MapPageComponent },
+  {
+    path: 'categories/:action',
+    component: CategoriesPageComponent
+  },
+  {
+    path: 'share/:category',
+    component: MapPageComponent,
+    canActivate: [AuthGuard]
+  },
   { path: 'explore/:category', component: SearchPageComponent },
-  { path: 'home', component: HomeComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'auth', component: AuthComponent },
+  {
+    path: '',
+    component: HomeComponent,
+    pathMatch: 'full'
+  },
   { path: '**', component: PageNotFoundComponent }
 ];
 

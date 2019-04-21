@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
+const coffeeI = require('../../assets/imgs/coffee.png');
+
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
