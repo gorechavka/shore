@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Place } from '../../models/place';
 
 @Component({
@@ -6,14 +6,20 @@ import { Place } from '../../models/place';
   templateUrl: './place-list.component.html',
   styleUrls: ['./place-list.component.css']
 })
-export class PlaceListComponent implements OnInit {
+export class PlaceListComponent {
   @Input() places: Place[];
 
   @Input() selectedPlace: string;
+
+  // @Output() loaded = new EventEmitter<boolean>();
+
+  loading: boolean = true;
 
   constructor() {
     this.selectedPlace = null;
   }
 
-  ngOnInit() {}
+  onLoaded() {
+    this.loading = false;
+  }
 }

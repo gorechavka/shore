@@ -52,9 +52,18 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   listenClicks() {
-    this.mapService.listen('click', this.map, ({ latlng: { lat, lng: lon } }) => {
+    this.mapService.listen('click', this.map, ({ latlng: { lat, lng: lon }, target }) => {
       this.setMark({ lat, lon });
       this.newCoords.emit({ lat, lon });
+    });
+  }
+
+  listenMapMove() {
+    this.mapService.listen('move', this.map, e => {
+      console.log(e);
+      // if (!e.target.classList.contains('map__container')) {
+      //   e.stopPropagation();
+      // }
     });
   }
 

@@ -1,8 +1,9 @@
 import { Place } from './place';
-import { Coords } from './coords';
+import { Userdb } from './Userdb';
 
 export interface State {
   places: Place[];
-  coords: Coords[];
+  images: ArrayBuffer[];
+  users?: Userdb[];
   error?: boolean;
 }

@@ -1,8 +1,11 @@
 <main class="container">
-  <app-map-search (newCoords)="onNewCoords($event)"></app-map-search>
-  <a class=" btn-large map__btn z-depth-3" title="Искать рядом"></a>
+  <div class="search__container">
+    <app-map-search (newCoords)="onNewCoords($event)"></app-map-search>
+    <a class=" btn-large map__btn z-depth-3" title="Искать рядом"></a>
+  </div>
   <!-- <app-tags></app-tags> -->
-  <app-place-list [places]="(filteredPlaces|async)"></app-place-list>
-  <button class="btn-floating arrow__btn btn-large" title="Показать больше"><i
+  <app-place-list [places]="(filteredPlaces|async)">
+  </app-place-list>
+  <button class=" btn-floating arrow__btn btn-large" title="Показать больше"><i
       class="material-icons">keyboard_arrow_down</i></button>
 </main>

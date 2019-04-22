@@ -36,7 +36,7 @@ export class MapService {
   }
 
   navigateTo(map, coords: number[]) {
-    map.setView(coords, 16);
+    map.setView(coords, 15);
   }
 
   changeMark({ markers, coords, tooltip = undefined }, category?: string) {

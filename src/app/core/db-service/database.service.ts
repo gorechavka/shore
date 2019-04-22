@@ -3,7 +3,6 @@ import { StateService } from '../state-service/state.service';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { State } from '../../models/state';
 import { Place } from '../../models/place';
-import { Coords } from '../../models/coords';
 import { Userdb } from '../../models/Userdb';
 
 @Injectable({
@@ -28,7 +27,10 @@ export class DatabaseService {
       });
   }
 
-  addData(type: 'places' | 'users', newData: Place | Userdb): firebase.database.ThenableReference {
+  addData(
+    type: 'places' | 'users' | 'images',
+    newData: Place | Userdb | { image: ArrayBuffer | string; id: string }
+  ): firebase.database.ThenableReference {
     //затестить
     // if (id !== undefined) {
     //   return this.afDatabase.list(`${type}/${id}`).push(newData);
@@ -36,7 +38,11 @@ export class DatabaseService {
     return this.afDatabase.list(type).push(newData);
   }
 
-  changeData(type: 'places' | 'users', key: string, newData: Place | Userdb) {
+  changeData(
+    type: 'places' | 'users' | 'images',
+    key: string,
+    newData: Place | Userdb | { image: ArrayBuffer | string; id: string }
+  ) {
     return this.afDatabase.list(type).update(key, newData);
   }
 }

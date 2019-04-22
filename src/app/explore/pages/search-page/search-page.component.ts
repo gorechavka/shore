@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Place } from '../../../models/place';
 import { StateService } from '../../../core/state-service/state.service';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, switchMap, zipAll, catchError } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Coords } from '../../../models/coords';
 import { CountService } from '../../../global/count-service/count.service';
-import { Observable } from 'rxjs';
+import { Observable, from, zip } from 'rxjs';
+import { places } from '../../../../utils/places-db';
+import { images } from '../../../../utils/images';
 
 @Component({
   selector: 'app-search-page',
@@ -14,7 +16,8 @@ import { Observable } from 'rxjs';
 })
 export class SearchPageComponent implements OnInit {
   places: Observable<Place[]>;
-  filteredPlaces: Observable<Place[]>;
+  filteredPlaces: Observable<any[]>;
+  images;
   category: string;
 
   constructor(private stateService: StateService, private route: ActivatedRoute, private countService: CountService) {
@@ -25,6 +28,7 @@ export class SearchPageComponent implements OnInit {
     this.places = this.stateService
       .getState('places')
       .pipe(map<Place[], any>(places => places.filter(place => place.category === this.category)));
+
     this.filteredPlaces = this.places;
   }
 

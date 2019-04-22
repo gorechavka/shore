@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Place } from '../../models/place';
+import { load } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-place-card',
@@ -11,6 +12,8 @@ export class PlaceCardComponent implements OnInit {
 
   @Output() select = new EventEmitter<string>();
 
+  @Output() loaded = new EventEmitter<boolean>();
+
   photo: string;
   name: string;
   description: string;
@@ -19,6 +22,11 @@ export class PlaceCardComponent implements OnInit {
 
   ngOnInit() {
     this.photo = `../assets/${this.place.image}`;
+  }
+
+  ngAfterViewInit(): void {
+    console.log('loaded');
+    this.loaded.emit(true);
   }
 
   selectPlace(name) {

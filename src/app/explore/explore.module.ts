@@ -8,6 +8,7 @@ import { TagComponent } from './tag/tag.component';
 import { PlaceComponent } from './place/place.component';
 import { MapModule } from '../global/map/map.module';
 import { MapSearchModule } from '../global/map-search/map-search.module';
+import { LoaderModule } from '../global/loader/loader.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,6 @@ import { MapSearchModule } from '../global/map-search/map-search.module';
     TagComponent,
     PlaceComponent
   ],
-  imports: [CommonModule, MapModule, MapSearchModule]
+  imports: [CommonModule, MapModule, MapSearchModule, LoaderModule]
 })
 export class ExploreModule {}
