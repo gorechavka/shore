@@ -2,12 +2,14 @@
 </app-map-place>
 
 <div class="map__container" id="map">
-  <div class=" leaflet-top">
-    <app-map-search (newCoords)="coords = $event" (dblclick)="$event.stopPropagation()"
-      (click)="$event.stopPropagation()">
+  <div class=" leaflet-top" (dblclick)="$event.stopPropagation()" (click)="$event.stopPropagation()">
+    <app-map-search (newCoords)="coords = $event">
     </app-map-search>
     <div class=" btn btn-large next__btn" title="Добавить место на карту" (click)="placeChoosen = true">Share
     </div>
   </div>
   <app-map (newCoords)="coords = $event" (choosenPlace)="showPlace($event)" [clickable]="true"></app-map>
+</div>
+<div class="create__container leaflet-bottom">
+  <app-create [coords]="coords" [category]="category" *ngIf="placeChoosen" (close)="placeChoosen = false"></app-create>
 </div>

@@ -17,6 +17,7 @@ export class MapPageComponent implements OnInit, AfterViewInit {
   coords: Coords;
   category: Category;
   places: { coords; title }[];
+  placeChoosen: boolean;
 
   private destroy$ = new Subject<boolean>();
 
