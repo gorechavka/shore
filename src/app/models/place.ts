@@ -7,5 +7,7 @@ export interface Place {
   description: string;
   image?: ArrayBuffer | string;
   coords?: Coords;
-  id?: string | number;
+  id?: string;
+  rate?: number;
+  voted?: string[];
 }

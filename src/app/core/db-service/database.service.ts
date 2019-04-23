@@ -4,6 +4,9 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { State } from '../../models/state';
 import { Place } from '../../models/place';
 import { Userdb } from '../../models/Userdb';
+import { User } from '../auth-service/user';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,33 +19,27 @@ export class DatabaseService {
   init() {
     console.log('start getting data');
     this.afDatabase
-      .object('/')
+      .object('places')
       .valueChanges()
       .subscribe((data: State) => {
-        for (let type in data) {
-          data[type] = Object.keys(data[type]).map(id => ({ ...data[type][id], id }));
-        }
-        console.log('start setting data');
-        this.stateService.setState(data);
+        const places = Object.keys(data).map(id => ({ ...data[id], id }));
+        this.stateService.setState(places);
       });
   }
 
-  addData(
-    type: 'places' | 'users' | 'images',
-    newData: Place | Userdb | { image: ArrayBuffer | string; id: string }
-  ): firebase.database.ThenableReference {
-    //затестить
-    // if (id !== undefined) {
-    //   return this.afDatabase.list(`${type}/${id}`).push(newData);
-    // }
+  getUserData(uid: string): Observable<Userdb> {
+    return this.afDatabase
+      .object('/users')
+      .valueChanges()
+      .pipe(map((users: Userdb[]) => users.find(user => user.uid === uid)));
+  }
+
+  addData(type: 'places' | 'users', newData: Place | Userdb): firebase.database.ThenableReference {
     return this.afDatabase.list(type).push(newData);
   }
 
-  changeData(
-    type: 'places' | 'users' | 'images',
-    key: string,
-    newData: Place | Userdb | { image: ArrayBuffer | string; id: string }
-  ) {
+  changeData(type: 'places' | 'users', key: string, newData: Place | Userdb) {
+    console.log(newData);
     return this.afDatabase.list(type).update(key, newData);
   }
 }

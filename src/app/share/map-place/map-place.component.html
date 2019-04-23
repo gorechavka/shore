@@ -2,7 +2,6 @@
   <div class="card-image">
     <button class="close__btn" (click)="onCloseClick()"><i class="close material-icons">close</i></button>
     <img [attr.src]="place.image" width="200" alt="place">
-    <a class="btn-floating halfway-fab show__btn " title="Узнать больше" (click)="selectPlace(place.title)"></a>
   </div>
   <div class=" card-content">
     <span class="card-title">{{place.title}}</span>

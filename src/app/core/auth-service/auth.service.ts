@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { DatabaseService } from '../db-service/database.service';
 import { User } from './user';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -28,21 +28,27 @@ export class AuthService {
       .subscribe(user => this._user$.next(user));
   }
 
-  get user(): Observable<User> {
+  get user$(): Observable<User> {
     return this._user$.asObservable();
   }
 
   get isLoggedIn$(): Observable<boolean> {
-    return this._user$.asObservable().pipe(map(user => !!user));
+    return this.user$.pipe(map(user => !!user));
+  }
+
+  getUserId(): Observable<string> {
+    return this.user$.pipe(map(user => user.uid));
   }
 
   emailSignin(email: string, password: string): Promise<Error | void> {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password).then(_ => this.redirect());
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password).then(userCred => {
+      this.redirect();
+    });
   }
 
   emailSignup(login: string, email: string, password: string): Promise<Error | void> {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(user => {
-      return this.addUser(user.user.uid, { email, login, password });
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(userCred => {
+      this.addUser(userCred.user.uid, { email, login, password });
     });
   }
 

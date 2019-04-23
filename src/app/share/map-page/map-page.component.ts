@@ -32,7 +32,7 @@ export class MapPageComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.stateService
-      .getState('places')
+      .getState()
       .pipe(
         takeUntil(this.destroy$),
         map((places: Place[]) =>

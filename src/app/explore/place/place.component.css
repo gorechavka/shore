@@ -81,15 +81,17 @@
 }
 
 .place__info {
-  margin: 20px 20px 0 10%;
+  margin: 60px 0px 0 10%;
   width: 40%;
+  word-wrap: break-word;
+
 }
 
 .place__title {
   font-weight: bold;
   letter-spacing: 4px;
   color: #202429;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 .place__description {
@@ -134,13 +136,19 @@
 
 .place__rating {
   border: none;
+  width: 100%;
   justify-self: flex-start;
-  text-align: start;
-
+  position: relative;
 }
 
 .place__rating input {
   display: none;
+}
+
+.rates__wrapper {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row-reverse;
 }
 
 .rate {
@@ -150,10 +158,37 @@
   height: 42px;
   background: url('../../assets/imgs/alien.png') no-repeat center;
   background-size: cover;
+  filter: grayscale(1);
 }
 
-.rate:nth-of-type(n+4) {
-  filter: grayscale(1)
+
+.vote:hover,
+.vote:hover~.rate {
+  filter: none;
+}
+
+input:checked~.rate {
+  filter: none;
+}
+
+.btn__vote {
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  position: absolute;
+  right: 40px;
+  bottom: 0px;
+  background-color: transparent;
+}
+
+.btn__vote i {
+  font-size: 30px;
+  color: rgba(99, 93, 109, 0.5);
+}
+
+.btn__vote:hover i {
+  color: rgba(61, 201, 119, 0.568);
+  text-shadow: 0 0 2px rgba(94, 197, 137, 0.418)
 }
 
 .comment__form {

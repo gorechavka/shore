@@ -6,19 +6,19 @@
   </div>
   <div class="place__info">
     <h2 class="place__title">{{place.title | uppercase}}</h2>
-    <a class="place__author">
+    <!-- <a class="place__author">
       <div class="author__photo" href="#">
         <img width="80px">
       </div>
-      <!-- <div class="author__info">
+      <div class="author__info">
         <div class="author__login"> Mr. Банан Дикий </div>
         <div class="author__date">29.09.1999</div>
-      </div> -->
-    </a>
+      </div>
+    </a> -->
     <p class="place__description">
       {{place.description}}
     </p>
-    <div class="place__tags">
+    <!-- <div class="place__tags">
       <div class="chip">
         #красиво
       </div>
@@ -31,7 +31,7 @@
       <div class="chip">
         #mystery
       </div>
-    </div>
+    </div> -->
     <div class="place__reviews">
       <!-- <section class="comment__form">
         <h5 class="title">Ваш коментарий</h5>
@@ -45,18 +45,25 @@
         </form>
         <button type="submit" class="comment__btn btn">Отправить</button>
       </section> -->
-      <fieldset class="place__rating" title="Оцени меня!">
-        <h5 class="title">Ваша оценка:)</h5>
-        <input type="radio" id="rate-1">
-        <label for="rate-1" class="rate"></label>
-        <input type="radio" id="rate-2">
-        <label for="rate-2" class="rate"></label>
-        <input type="radio" id="rate-3">
-        <label for="rate-3" class="rate"></label>
-        <input type="radio" id="rate-4">
-        <label for="rate-4" class="rate"></label>
-        <input type="radio" id="rate-5">
-        <label for="rate-5" class="rate"></label>
+      <fieldset class="place__rating">
+        <h5 class="title">ОЦЕНКА:</h5>
+        <div class="rates__wrapper" *ngIf="!inVoteState">
+          <ng-container *ngFor="let rate of rates;
+          let i = index">
+            <input type="radio" [attr.id]="rate" name="rate" [attr.value]="5-i" [checked]="placeRate == 5-i">
+            <label [attr.for]="rate" class="rate"></label>
+          </ng-container>
+        </div>
+        <button class="btn-floating btn-large btn__vote" title="Оценить" (click)="onVote()" *ngIf="!userVoted"><i
+            class="material-icons">touch_app</i></button>
+        <div class="rates__wrapper" *ngIf="inVoteState" title="Оцени меня!">
+          <ng-container *ngFor="let rate of rates;
+            let i = index">
+            <input type="radio" [attr.id]="rate" name="rate" (change)="onRateClick($event.target)" [attr.value]="5-i">
+            <label [attr.for]="rate" class="rate vote"></label>
+          </ng-container>
+        </div>
+
       </fieldset>
     </div>
   </div>
