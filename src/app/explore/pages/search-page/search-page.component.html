@@ -6,14 +6,13 @@
   <!-- <app-tags></app-tags> -->
   <app-place-list [places]="(filteredPlaces|async)" *ngIf="!searchOnMap">
   </app-place-list>
+  <div [ngClass]="{'map__container': true, 'z-depth-4': true, 'left': !!choosenPlace}" id="map" *ngIf="searchOnMap">
+    <app-map (choosenPlace)="onChoosePlace($event)" [coords]="coords" #map (mapLoaded)=onMapLoaded(map)>
+    </app-map>
+  </div>
+  <div class="aside__place" *ngIf="choosenPlace">
+    <app-place-aside [place]="choosenPlace" (hide)="choosenPlace = null"></app-place-aside>
+  </div>
   <button class=" btn-floating arrow__btn btn-large" title="Показать больше"><i
       class="material-icons">keyboard_arrow_down</i></button>
-  <div class="map__container z-depth-4" id="map">
-    <app-map *ngIf="searchOnMap" (choosenPlace)="onChoosePlace($event)" [coords]="coords" #map
-      (mapLoaded)=onMapLoaded(map)>
-    </app-map>
-    <div class="leaflet-right">
-      <app-place-aside [place]="choosenPlace" *ngIf="choosenPlace" (hide)="choosenPlace = null"></app-place-aside>
-    </div>
-  </div>
 </main>

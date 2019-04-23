@@ -19,15 +19,9 @@ export class PlaceComponent implements OnInit {
   placeRate: number;
   inVoteState: boolean = false;
 
-  constructor(private dbService: DatabaseService, private auth: AuthService) {}
+  constructor(public dbService: DatabaseService) {}
 
-  ngOnInit() {
-    this.auth.getUserId().subscribe(uid => {
-      this.uid = uid;
-      this.userVoted = !!this.place.voted && this.place.voted.includes(uid);
-    });
-    this.setRate();
-  }
+  ngOnInit() {}
 
   setRate() {
     this.placeRate = this.place.rate || 0;
@@ -52,7 +46,7 @@ export class PlaceComponent implements OnInit {
     this.inVoteState = true;
   }
 
-  private setVoted() {
+  public setVoted() {
     if (!this.place.voted) {
       this.place.voted = [this.uid];
     } else if (!this.place.voted.includes(this.uid)) {
@@ -60,7 +54,7 @@ export class PlaceComponent implements OnInit {
     }
   }
 
-  private countRate(newRate) {
+  public countRate(newRate) {
     if (!this.place.rate) {
       this.place.rate = 0;
     }

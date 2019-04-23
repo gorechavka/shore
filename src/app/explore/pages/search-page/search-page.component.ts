@@ -20,13 +20,14 @@ export class SearchPageComponent implements OnInit {
   coords: Coords;
   category: Category;
   searchOnMap = false;
-  choosenPlace: Place;
+  choosenPlace: Place = null;
 
   constructor(private stateService: StateService, private route: ActivatedRoute, private countService: CountService) {
     this.category = <Category>this.route.snapshot.paramMap.get('category');
   }
 
   ngOnInit() {
+    console.log(this.choosenPlace);
     this.places = this.stateService
       .getState()
       .pipe(map<Place[], any>(places => places.filter(place => place.category === this.category)));

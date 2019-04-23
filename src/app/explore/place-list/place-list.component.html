@@ -1,5 +1,6 @@
 <ng-container *ngFor="let place of places">
   <app-place-card [place]="place" (select)="selectedPlace = $event" (loaded)=onLoaded()></app-place-card>
-  <app-place [place]="place" *ngIf="selectedPlace === place.title" (hide)="selectedPlace = null"></app-place>
+  <app-place-modal [place]="place" *ngIf="selectedPlace === place.title" (hide)="selectedPlace = null">
+  </app-place-modal>
 </ng-container>
 <app-loader [hidden]="!loading"></app-loader>

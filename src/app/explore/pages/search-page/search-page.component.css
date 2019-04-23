@@ -1,5 +1,7 @@
 main.container {
   width: 80vw;
+  position: relative;
+  height: 100%;
 }
 
 app-map-search {
@@ -75,16 +77,28 @@ app-map {
 }
 
 .map__container {
-
-  position: relative;
-  width: 60%;
-  margin: 20px auto auto;
-  border-radius: 70px;
-  outline: none;
+  position: absolute;
+  top: 110px;
+  height: 75vh;
+  width: 65%;
+  left: 200px;
+  border-radius: 150px;
+  transition: left 0.3s;
 }
 
-.leaflet-right {
+
+.map__container.left {
+  left: 100px
+}
+
+.aside__place {
   position: absolute;
-  right: 0;
+  top: 250px;
   z-index: 500;
+  width: 22vw;
+  height: 47vh;
+  right: 80px;
+  border-radius: 150px;
+  background-color: rgba(250, 250, 250, 0.8);
+  box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.12), 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.18);
 }

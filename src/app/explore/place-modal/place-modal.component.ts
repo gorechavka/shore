@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Place } from '../../models/place';
 import { DatabaseService } from '../../core/db-service/database.service';
 import { AuthService } from '../../core/auth-service/auth.service';
 import { PlaceComponent } from '../place/place.component';
 
 @Component({
-  selector: 'app-place-aside',
-  templateUrl: './place-aside.component.html',
-  styleUrls: ['./place-aside.component.css']
+  selector: 'app-place-modal',
+  templateUrl: './place-modal.component.html',
+  styleUrls: ['./place-modal.component.css']
 })
-export class PlaceAsideComponent extends PlaceComponent implements OnInit {
+export class PlaceModalComponent extends PlaceComponent implements OnInit {
   constructor(dbService: DatabaseService, private auth: AuthService) {
     super(dbService);
   }
