@@ -11,20 +11,23 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class MapSearchComponent implements OnInit, OnDestroy {
   @Output() newCoords = new EventEmitter<Coords>();
+  @Output() emptyQuery = new EventEmitter();
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private mapSearchService: MapSearchService) {}
 
   ngOnInit() {
-    //обработка ошибок!!!
+    // обработка ошибок!!!
     this.mapSearchService
       .searchQuery()
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (coords: Coords) => {
-          //обработка ошибок!!!
-          if (coords.lat === undefined || coords.lon === undefined) return;
+          // обработка ошибок!!!
+          if (coords.lat === undefined || coords.lon === undefined) {
+            return;
+          }
           this.newCoords.emit(coords);
         },
         err => console.log(err)
@@ -32,6 +35,9 @@ export class MapSearchComponent implements OnInit, OnDestroy {
   }
 
   onSearch(input) {
+    if (!input) {
+      this.emptyQuery.emit();
+    }
     this.mapSearchService.setQuery(input);
   }
 

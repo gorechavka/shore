@@ -8,7 +8,7 @@
     <div class=" btn btn-large next__btn" title="Добавить место на карту" (click)="placeChoosen = true">Share
     </div>
   </div>
-  <app-map (newCoords)="coords = $event" (choosenPlace)="showPlace($event)" [clickable]="true"></app-map>
+  <app-map (newCoords)="coords = $event" (choosenPlace)="showPlace($event)" [shareState]="true"></app-map>
 </div>
 <div class="create__container leaflet-bottom">
   <app-create [coords]="coords" [category]="category" *ngIf="placeChoosen" (close)="placeChoosen = false"></app-create>

@@ -1,11 +1,19 @@
 <main class="container">
   <div class="search__container">
-    <app-map-search (newCoords)="onNewCoords($event)"></app-map-search>
-    <a class=" btn-large map__btn z-depth-3" title="Искать рядом"></a>
+    <app-map-search (newCoords)="onNewCoords($event)" (emptyQuery)="onStopSearch()"></app-map-search>
+    <a class=" btn-large map__btn z-depth-3" title="Искать на карте" (click)="onMapOpenClick()"></a>
   </div>
   <!-- <app-tags></app-tags> -->
-  <app-place-list [places]="(filteredPlaces|async)">
+  <app-place-list [places]="(filteredPlaces|async)" *ngIf="!searchOnMap">
   </app-place-list>
   <button class=" btn-floating arrow__btn btn-large" title="Показать больше"><i
       class="material-icons">keyboard_arrow_down</i></button>
+  <div class="map__container z-depth-4" id="map">
+    <app-map *ngIf="searchOnMap" (choosenPlace)="onChoosePlace($event)" [coords]="coords" #map
+      (mapLoaded)=onMapLoaded(map)>
+    </app-map>
+    <div class="leaflet-right">
+      <app-place-aside [place]="choosenPlace" *ngIf="choosenPlace" (hide)="choosenPlace = null"></app-place-aside>
+    </div>
+  </div>
 </main>

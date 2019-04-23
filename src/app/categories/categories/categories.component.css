@@ -21,7 +21,7 @@
   border-radius: 90px;
   margin-right: 50px;
   margin-bottom: 50px;
-  filter: grayscale(1) brightness(0.5)
+  filter: grayscale(1) brightness(0.5);
 }
 
 .category__switch {
@@ -29,7 +29,7 @@
 }
 
 .category:hover {
-  filter: grayscale(0.5) brightness(1)
+  filter: grayscale(0.5)
 }
 
 .category__switch:checked+.category {

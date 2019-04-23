@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, SimpleChanges, AfterViewInit } from '@angular/core';
 import { MapService } from './map.service';
 import { Coords } from '../../models/coords';
 import { MapSearchService } from '../map-search/map-search.service';
@@ -13,11 +13,14 @@ import { Place } from '../../models/place';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit, OnDestroy {
+export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() coords: Coords;
-  @Input() clickable: boolean;
+  @Input() shareState = false;
+  @Input() category: Category;
+
   @Output() newCoords = new EventEmitter<Coords>();
   @Output() choosenPlace = new EventEmitter<Place>();
+  @Output() mapLoaded = new EventEmitter<boolean>();
 
   map;
   markers: Array<any>;
@@ -46,9 +49,13 @@ export class MapComponent implements OnInit, OnDestroy {
         }
       });
 
-    if (this.clickable) {
+    if (this.shareState) {
       this.listenClicks();
     }
+  }
+
+  ngAfterViewInit(): void {
+    this.mapLoaded.emit(true);
   }
 
   listenClicks() {
@@ -59,7 +66,10 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   setPlaces(places, category: Category) {
-    if (!places || !this.map) return;
+    if (!places || !this.map) {
+      console.log('cancel');
+      return;
+    }
     const markers = this.mapService.createMarksGroup(
       places.map(({ coords, title }) => ({ coords, tooltip: title })),
       category
@@ -88,7 +98,9 @@ export class MapComponent implements OnInit, OnDestroy {
     markers.forEach(marker => {
       marker.on('click', ({ latlng }) => {
         const place = places.find(({ coords }: Place) => coords.lat == latlng.lat && coords.lon == latlng.lng);
-        if (place) this.choosenPlace.emit(place);
+        if (place) {
+          this.choosenPlace.emit(place);
+        }
       });
     });
   }

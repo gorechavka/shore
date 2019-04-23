@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
   private _user$ = new BehaviorSubject<User>(null);
-  private _redirectUrl: string = '';
+  private _redirectUrl = '';
 
   set redirectUrl(path) {
     this._redirectUrl = path;
@@ -21,7 +21,9 @@ export class AuthService {
     this.afAuth.authState
       .pipe(
         map(userData => {
-          if (userData) return { uid: userData.uid, email: userData.email };
+          if (userData) {
+            return { uid: userData.uid, email: userData.email };
+          }
           return null;
         })
       )
@@ -41,7 +43,7 @@ export class AuthService {
   }
 
   emailSignin(email: string, password: string): Promise<Error | void> {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password).then(userCred => {
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password).then(_ => {
       this.redirect();
     });
   }

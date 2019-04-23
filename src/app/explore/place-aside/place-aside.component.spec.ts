@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TagComponent } from './tag.component';
+import { PlaceAsideComponent } from './place-aside.component';
 
-describe('TagComponent', () => {
-  let component: TagComponent;
-  let fixture: ComponentFixture<TagComponent>;
+describe('PlaceAsideComponent', () => {
+  let component: PlaceAsideComponent;
+  let fixture: ComponentFixture<PlaceAsideComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TagComponent ]
+      declarations: [ PlaceAsideComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TagComponent);
+    fixture = TestBed.createComponent(PlaceAsideComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { Coords } from '../../models/coords';
 import { ActivatedRoute } from '@angular/router';
 import { Place } from '../../models/place';
@@ -13,7 +13,7 @@ import { Category } from '../../models/category';
   templateUrl: './map-page.component.html',
   styleUrls: ['./map-page.component.css']
 })
-export class MapPageComponent implements OnInit, AfterViewInit {
+export class MapPageComponent implements OnInit, AfterViewInit, OnDestroy {
   coords: Coords;
   category: Category;
   places: { coords; title }[];
