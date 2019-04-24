@@ -1,4 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
+} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Coords } from '../../models/coords';
 import { Place } from '../../models/place';
@@ -8,8 +16,8 @@ import { CreateService } from './create.service';
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./create.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateComponent implements OnInit {
   @Input() category: Category;
@@ -21,7 +29,7 @@ export class CreateComponent implements OnInit {
   image: string | ArrayBuffer;
   imageLoaded: boolean;
 
-  constructor(private fb: FormBuilder, private createService: CreateService) {}
+  constructor(private fb: FormBuilder, private createService: CreateService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -48,16 +56,13 @@ export class CreateComponent implements OnInit {
     reader.addEventListener('load', _ => {
       this.imageLoaded = true;
       this.image = reader.result;
+      this.cdr.detectChanges();
     });
 
     if (fileInput.files && fileInput.files.length) {
       const [file] = fileInput.files;
       reader.readAsDataURL(file);
     }
-
-    reader.addEventListener('load', (event: any) => {
-      console.log('image was loaded');
-    });
   }
 
   onSubmit(e: Event) {
