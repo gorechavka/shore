@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../../models/category.model';
+import { StateService } from '../../core/state-service/state.service';
 
 @Component({
   selector: 'app-categories-page',
@@ -10,7 +11,7 @@ import { Category } from '../../models/category.model';
 export class CategoriesPageComponent implements OnInit {
   action: string;
   category: Category;
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router, private stateService: StateService) {}
 
   ngOnInit() {
     this.action = this.route.snapshot.paramMap.get('action');
@@ -18,6 +19,7 @@ export class CategoriesPageComponent implements OnInit {
 
   onCategoryChoose(category: Category) {
     this.category = category;
+    this.stateService.setCategory(category);
   }
 
   goNext() {

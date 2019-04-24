@@ -27,7 +27,8 @@ export class MapPageComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private route: ActivatedRoute, private stateService: StateService) {}
 
   ngOnInit() {
-    this.category = <Category>this.route.snapshot.paramMap.get('category');
+    // this.category = <Category>this.route.snapshot.paramMap.get('category');
+    this.stateService.getCategory().subscribe(category => (this.category = <Category>category));
   }
 
   ngAfterViewInit(): void {

@@ -10,15 +10,15 @@ export class CreateService {
 
   addPlace(place: Place, errorHandler?): Promise<string | void> {
     return this.dbService
-      .addData('places', place)
-      .then(ref => Promise.resolve(ref.key))
+      .addPlaceData(place)
+      .then(ref => this.handleSuccess(ref.key))
       .catch(err => this.handleError(err, errorHandler));
   }
 
-  private handleSuccess(handler?: () => void) {
+  private handleSuccess(key, handler?: () => void) {
     if (handler !== undefined) {
       handler();
-    } else console.log('success');
+    } else return Promise.resolve(key);
   }
 
   private handleError(err: Error, handler?: (err: Error) => void) {

@@ -31,7 +31,7 @@ export class PlaceComponent {
   public onRateClick(input) {
     input.checked = true;
     this.setVoted();
-    this.dbService.changeData('places', this.place.id, {
+    this.dbService.changePlaceData(this.place.id, {
       ...this.place,
       rate: this.countRate(input.value),
       voted: this.place.voted

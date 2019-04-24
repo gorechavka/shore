@@ -34,17 +34,6 @@ export class SearchPageComponent implements OnInit {
         this.initPlaces = places;
         this.places$.next(places);
       });
-
-    // this.stateExpService
-    //   .getState()
-    //   .pipe(
-    //     tap(place => console.log(place)),
-    //     filter(place => place.category === this.category)
-    //   )
-    //   .subscribe(place => {
-    //     this.initPlaces = [...this.initPlaces, place];
-    //     this.places$.next(this.initPlaces);
-    //   });
   }
 
   onNewCoords(coords: Coords) {

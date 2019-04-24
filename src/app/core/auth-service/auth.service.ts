@@ -51,6 +51,7 @@ export class AuthService {
   emailSignup(login: string, email: string, password: string): Promise<Error | void> {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(userCred => {
       this.addUser(userCred.user.uid, { email, login, password });
+      this.redirect();
     });
   }
 
@@ -62,7 +63,7 @@ export class AuthService {
   }
 
   addUser(uid, { email, login, password }) {
-    this.dbService.changeData('users', uid, { email, login, password });
+    this.dbService.changeUserData(uid, { email, login, password });
   }
 
   redirect() {

@@ -14,6 +14,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { environment } from '../environments/environment';
 import { AuthModule } from './global/auth/auth.module';
+import { Location } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, PageNotFoundComponent],
