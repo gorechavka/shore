@@ -13,7 +13,7 @@ export class MapSearchComponent implements OnInit, OnDestroy {
   @Output() newCoords = new EventEmitter<Coords>();
   @Output() emptyQuery = new EventEmitter();
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
+  _destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private mapSearchService: MapSearchService) {}
 
@@ -21,7 +21,7 @@ export class MapSearchComponent implements OnInit, OnDestroy {
     // обработка ошибок!!!
     this.mapSearchService
       .searchQuery()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntil(this._destroy$))
       .subscribe(
         (coords: Coords) => {
           // обработка ошибок!!!
@@ -34,7 +34,7 @@ export class MapSearchComponent implements OnInit, OnDestroy {
       );
   }
 
-  onSearch(input) {
+  onSearch(input: string) {
     if (!input) {
       this.emptyQuery.emit();
     }
@@ -42,7 +42,7 @@ export class MapSearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.unsubscribe();
+    this._destroy$.next();
+    this._destroy$.unsubscribe();
   }
 }

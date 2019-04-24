@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { debounceTime, switchMap, map, catchError } from 'rxjs/operators';
+import { debounceTime, switchMap, map, catchError, distinctUntilChanged } from 'rxjs/operators';
 import { Observable, Subject, of } from 'rxjs';
 import { Address } from '../../models/address';
 import { geoAddress } from '../../models/geoAddress';
@@ -20,9 +20,10 @@ export class MapSearchService {
     this.query$.next(input);
   }
 
-  searchQuery() {
+  searchQuery(): Observable<Coords> {
     return this.query$.asObservable().pipe(
       debounceTime(500),
+      distinctUntilChanged(),
       switchMap(query => this.getCoords(query))
     );
   }
@@ -39,9 +40,4 @@ export class MapSearchService {
       .get(`${this.REVERSE_URL}&lat=${lat}&lon=${lon}`)
       .pipe(map(({ address, display_name }: Address) => ({ address: address, display_name })));
   }
-
-  // responseWithError(err) {
-  //   console.log(err.message);
-  //   return err;
-  // }
 }

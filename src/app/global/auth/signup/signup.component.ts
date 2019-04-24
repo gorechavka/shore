@@ -37,19 +37,19 @@ export class SignupComponent implements OnInit {
       .setValidators([Validators.required, PasswordValidators.equal(this.form.get('password'))]);
   }
 
-  get loginInvalid() {
+  get loginInvalid(): boolean {
     return this._checkErrors('login');
   }
 
-  get emailInvalid() {
+  get emailInvalid(): boolean {
     return this._checkErrors('email');
   }
 
-  get passwordInvalid() {
+  get passwordInvalid(): boolean {
     return this._checkErrors('password');
   }
 
-  get confirmationInvalid() {
+  get confirmationInvalid(): boolean {
     return this._checkErrors('confirmation');
   }
 

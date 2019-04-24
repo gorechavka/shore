@@ -16,14 +16,14 @@ import { Category } from '../../models/category';
 export class MapPageComponent implements OnInit, AfterViewInit, OnDestroy {
   coords: Coords;
   category: Category;
-  places: { coords; title }[];
+  places: { coords: Coords; title: string }[];
   placeChoosen: boolean;
+  placeToShow: Place;
 
   private destroy$ = new Subject<boolean>();
 
   @ViewChild(MapComponent) mapComponent: MapComponent;
 
-  placeToShow: Place;
   constructor(private route: ActivatedRoute, private stateService: StateService) {}
 
   ngOnInit() {

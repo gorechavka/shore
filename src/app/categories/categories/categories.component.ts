@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Category } from '../../models/category';
 
 @Component({
   selector: 'app-categories',
@@ -23,7 +24,7 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit() {}
 
-  chooseCategory(category) {
+  chooseCategory(category: Category) {
     this.choose.emit(category);
   }
 }

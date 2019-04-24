@@ -6,10 +6,6 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './page-not-found.component.html',
   styleUrls: ['./page-not-found.component.css']
 })
-export class PageNotFoundComponent implements OnInit {
+export class PageNotFoundComponent {
   constructor(private route: ActivatedRoute) {}
-
-  ngOnInit() {
-    this.route.url.subscribe(url => console.log(url));
-  }
 }

@@ -24,7 +24,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     return this.authService.isLoggedIn$.pipe(
       take(1),
       map(isLoggedIn => {
-        console.log(`is logged in : ${isLoggedIn}`);
         if (isLoggedIn) {
           return true;
         }

@@ -4,9 +4,8 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { State } from '../../models/state';
 import { Place } from '../../models/place';
 import { Userdb } from '../../models/Userdb';
-import { User } from '../auth-service/user';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map, retry, takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,14 +16,18 @@ export class DatabaseService {
   }
 
   init() {
-    console.log('start getting data');
     this.afDatabase
       .object('places')
       .valueChanges()
-      .subscribe((data: State) => {
-        const places = Object.keys(data).map(id => ({ ...data[id], id }));
-        this.stateService.setState(places);
-      });
+      .pipe(retry(5))
+      .subscribe(
+        (data: State) => {
+          console.log('got data');
+          const places = Object.keys(data).map(id => ({ ...data[id], id }));
+          this.stateService.setState(places);
+        },
+        err => console.log(err.message)
+      );
   }
 
   getUserData(uid: string): Observable<Userdb> {
@@ -38,8 +41,7 @@ export class DatabaseService {
     return this.afDatabase.list(type).push(newData);
   }
 
-  changeData(type: 'places' | 'users', key: string, newData: Place | Userdb) {
-    console.log(newData);
+  changeData(type: 'places' | 'users', key: string, newData: Place | Userdb): Promise<void> {
     return this.afDatabase.list(type).update(key, newData);
   }
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 import { PlaceCardComponent } from './place-card/place-card.component';
 import { PlaceListComponent } from './place-list/place-list.component';
 import { MapModule } from '../global/map/map.module';
@@ -11,7 +11,14 @@ import { PlaceModalComponent } from './place-modal/place-modal.component';
 import { PlaceComponent } from './place/place.component';
 
 @NgModule({
-  declarations: [SearchPageComponent, PlaceCardComponent, PlaceListComponent, PlaceModalComponent, PlaceAsideComponent, PlaceComponent],
+  declarations: [
+    SearchPageComponent,
+    PlaceCardComponent,
+    PlaceListComponent,
+    PlaceModalComponent,
+    PlaceAsideComponent,
+    PlaceComponent
+  ],
   imports: [CommonModule, MapModule, MapSearchModule, LoaderModule]
 })
 export class ExploreModule {}

@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { State } from '../../models/state';
-import { map } from 'rxjs/operators';
 import { Place } from '../../models/place';
 
 @Injectable({
@@ -17,6 +15,7 @@ export class StateService {
   }
 
   setState(newState) {
+    console.log('set state');
     this.state$.next(newState);
   }
 }

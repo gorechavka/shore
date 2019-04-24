@@ -25,6 +25,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
   map;
   markers: Array<any>;
   adress: string;
+
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private mapService: MapService, private mapSearchService: MapSearchService) {}
@@ -58,14 +59,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.mapLoaded.emit(true);
   }
 
-  listenClicks() {
-    this.mapService.listen('click', this.map, ({ latlng: { lat, lng: lon } }) => {
-      this.setMark({ lat, lon });
-      this.newCoords.emit({ lat, lon });
-    });
-  }
-
-  setPlaces(places, category: Category) {
+  setPlaces(places: Place[], category: Category) {
     if (!places || !this.map) {
       console.log('cancel');
       return;
@@ -82,6 +76,13 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     this.map.addLayer(cluster);
   }
 
+  private listenClicks() {
+    this.mapService.listen('click', this.map, ({ latlng: { lat, lng: lon } }) => {
+      this.setMark({ lat, lon });
+      this.newCoords.emit({ lat, lon });
+    });
+  }
+
   private setMark({ lat, lon }, tooltip?: string) {
     const newMark = this.mapService.changeMark({
       markers: this.markers,
@@ -94,7 +95,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  private bindPlaces(markers, places) {
+  private bindPlaces(markers: Array<any>, places: Place[]) {
     markers.forEach(marker => {
       marker.on('click', ({ latlng }) => {
         const place = places.find(({ coords }: Place) => coords.lat == latlng.lat && coords.lon == latlng.lng);
@@ -109,7 +110,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.mapSearchService.getAddress(coords).pipe(takeUntil(this.destroy$));
   }
 
-  private shortenAdress(adress) {
+  private shortenAdress(adress: string): string {
     return adress.split(',')[0] + ', ' + adress.split(',')[1];
   }
 

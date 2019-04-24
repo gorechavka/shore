@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/auth-service/auth.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signin',
@@ -11,6 +13,8 @@ export class SigninComponent implements OnInit {
   @Output() registrationRequest = new EventEmitter();
   form: FormGroup;
 
+  _destroy$ = new Subject();
+
   constructor(private fb: FormBuilder, private auth: AuthService) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -19,14 +23,14 @@ export class SigninComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.auth.isLoggedIn$.subscribe(isLoggedIn => {
+    this.auth.isLoggedIn$.pipe(takeUntil(this._destroy$)).subscribe(isLoggedIn => {
       if (isLoggedIn) {
         this.auth.redirect();
       }
     });
   }
 
-  get emailInvalid() {
+  get emailInvalid(): boolean {
     return this._checkErrors('email');
   }
 
@@ -44,7 +48,13 @@ export class SigninComponent implements OnInit {
   onRegistrationClick() {
     this.registrationRequest.emit();
   }
+
   private _checkErrors(control: string): boolean {
     return this.form.get(control).invalid && (this.form.get(control).touched || this.form.get(control).dirty);
+  }
+
+  ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.unsubscribe();
   }
 }

@@ -1,13 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Place } from '../../../models/place';
-import { StateService } from '../../../core/state-service/state.service';
-import { map } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { Place } from '../../models/place';
+import { StateService } from '../../core/state-service/state.service';
+import { map, takeUntil, tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { Coords } from '../../../models/coords';
-import { CountService } from '../../../global/count-service/count.service';
-import { Observable } from 'rxjs';
-import { MapComponent } from '../../../global/map/map.component';
-import { Category } from '../../../models/category';
+import { Coords } from '../../models/coords';
+import { CountService } from '../../global/count-service/count.service';
+import { Observable, Subject } from 'rxjs';
+import { Category } from '../../models/category';
 
 @Component({
   selector: 'app-search-page',
@@ -15,35 +14,36 @@ import { Category } from '../../../models/category';
   styleUrls: ['./search-page.component.css']
 })
 export class SearchPageComponent implements OnInit {
-  places: Observable<Place[]>;
-  filteredPlaces: Observable<any[]>;
   coords: Coords;
   category: Category;
   searchOnMap = false;
   choosenPlace: Place = null;
+  places$: Observable<Place[]>;
+  filteredPlaces$: Observable<Place[]>;
+  _destroy$ = new Subject();
 
   constructor(private stateService: StateService, private route: ActivatedRoute, private countService: CountService) {
     this.category = <Category>this.route.snapshot.paramMap.get('category');
   }
 
   ngOnInit() {
-    console.log(this.choosenPlace);
-    this.places = this.stateService
-      .getState()
-      .pipe(map<Place[], any>(places => places.filter(place => place.category === this.category)));
+    this.places$ = this.stateService.getState().pipe(
+      tap(_ => 'got places'),
+      map<Place[], any>(places => places.filter(place => place.category === this.category))
+    );
 
-    this.filteredPlaces = this.places;
+    this.filteredPlaces$ = this.places$;
   }
 
   onNewCoords(coords: Coords) {
     this.coords = coords;
-    this.filteredPlaces = this.places.pipe(
+    this.filteredPlaces$ = this.places$.pipe(
       map(places => places.filter(place => this.checkNeighborhood(place.coords, coords)))
     );
   }
 
   onStopSearch() {
-    this.filteredPlaces = this.places;
+    this.filteredPlaces$ = this.places$;
   }
 
   onMapOpenClick() {
@@ -51,7 +51,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   onMapLoaded(map) {
-    this.filteredPlaces.subscribe(places => map.setPlaces(places, this.category));
+    this.filteredPlaces$.pipe(takeUntil(this._destroy$)).subscribe(places => map.setPlaces(places, this.category));
   }
 
   onChoosePlace(place) {

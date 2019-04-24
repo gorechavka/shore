@@ -1,14 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Place } from '../../models/place';
 import { DatabaseService } from '../../core/db-service/database.service';
-import { AuthService } from '../../core/auth-service/auth.service';
 
 @Component({
   selector: 'app-place',
   templateUrl: './place.component.html',
   styleUrls: ['./place.component.css']
 })
-export class PlaceComponent implements OnInit {
+export class PlaceComponent {
   @Input() place: Place;
 
   @Output() hide = new EventEmitter();
@@ -21,17 +20,15 @@ export class PlaceComponent implements OnInit {
 
   constructor(public dbService: DatabaseService) {}
 
-  ngOnInit() {}
-
-  setRate() {
+  public setRate() {
     this.placeRate = this.place.rate || 0;
   }
 
-  onCloseClick() {
+  public onCloseClick() {
     this.hide.emit();
   }
 
-  onRateClick(input) {
+  public onRateClick(input) {
     input.checked = true;
     this.setVoted();
     this.dbService.changeData('places', this.place.id, {
@@ -42,7 +39,7 @@ export class PlaceComponent implements OnInit {
     this.inVoteState = false;
   }
 
-  onVote() {
+  public onVote() {
     this.inVoteState = true;
   }
 

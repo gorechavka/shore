@@ -7,7 +7,7 @@ export class CountService {
   constructor() {}
 
   countDist({ lat: lat1, lon: lon1 }, { lat: lat2, lon: lon2 }): number {
-    const R = 6371e3; //earth radius in metres
+    const R = 6371e3;
     const φ1 = this.toRadians(lat1);
     const φ2 = this.toRadians(lat2);
     const Δφ = this.toRadians(lat2 - lat1);

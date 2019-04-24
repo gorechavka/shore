@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Place } from '../../models/place';
 
 @Component({
@@ -10,8 +10,6 @@ export class PlaceListComponent {
   @Input() places: Place[];
 
   @Input() selectedPlace: string;
-
-  // @Output() loaded = new EventEmitter<boolean>();
 
   loading: boolean = true;
 

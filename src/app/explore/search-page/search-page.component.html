@@ -3,8 +3,7 @@
     <app-map-search (newCoords)="onNewCoords($event)" (emptyQuery)="onStopSearch()"></app-map-search>
     <a class=" btn-large map__btn z-depth-3" title="Искать на карте" (click)="onMapOpenClick()"></a>
   </div>
-  <!-- <app-tags></app-tags> -->
-  <app-place-list [places]="(filteredPlaces|async)" *ngIf="!searchOnMap">
+  <app-place-list [places]="(filteredPlaces$|async)" *ngIf="!searchOnMap">
   </app-place-list>
   <div [ngClass]="{'map__container': true, 'z-depth-4': true, 'left': !!choosenPlace}" id="map" *ngIf="searchOnMap">
     <app-map (choosenPlace)="onChoosePlace($event)" [coords]="coords" #map (mapLoaded)=onMapLoaded(map)>

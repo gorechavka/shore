@@ -15,13 +15,13 @@ export class CreateService {
       .catch(err => this.handleError(err, errorHandler));
   }
 
-  handleSuccess(handler?: () => void) {
+  private handleSuccess(handler?: () => void) {
     if (handler !== undefined) {
       handler();
     } else console.log('success');
   }
 
-  handleError(err: Error, handler?: (err: Error) => void) {
+  private handleError(err: Error, handler?: (err: Error) => void) {
     if (handler !== undefined) {
       handler(err);
     } else console.log(`Error ${err.message}`);

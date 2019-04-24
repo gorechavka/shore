@@ -76,20 +76,18 @@ export class CreateComponent implements OnInit {
     };
 
     this.createService.addPlace(this.place);
-    //если решу хранить и подгружать картинки отдельно
-    // .then(id => this.createService.addImage(this.image, <string>id));
-    // this.createService.addImage(this.image, id????);
+
     this.finish();
   }
 
-  finish() {
-    this.imageLoaded = false;
-    this.image = null;
-    this.form.reset();
+  onCloseClick() {
     this.close.emit();
   }
 
-  onCloseClick() {
+  private finish() {
+    this.imageLoaded = false;
+    this.image = null;
+    this.form.reset();
     this.close.emit();
   }
 }

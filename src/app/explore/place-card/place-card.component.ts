@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { Place } from '../../models/place';
-import { load } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-place-card',
@@ -17,8 +16,6 @@ export class PlaceCardComponent implements OnInit, AfterViewInit {
   photo: string;
   name: string;
   description: string;
-
-  constructor() {}
 
   ngOnInit() {
     this.photo = `../assets/${this.place.image}`;
