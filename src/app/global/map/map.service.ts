@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Category } from '../../models/category';
 import { MapIconService } from './map-icon.service';
 declare let L;
 

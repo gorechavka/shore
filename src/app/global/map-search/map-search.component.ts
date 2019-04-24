@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { MapSearchService } from './map-search.service';
 import { Subject } from 'rxjs';
-import { Coords } from '../../models/coords';
+import { Coords } from '../../models/coords.model';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({

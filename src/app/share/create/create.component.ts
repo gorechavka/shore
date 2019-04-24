@@ -8,9 +8,9 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Coords } from '../../models/coords';
-import { Place } from '../../models/place';
-import { Category } from '../../models/category';
+import { Coords } from '../../models/coords.model';
+import { Place } from '../../models/place.model';
+import { Category } from '../../models/category.model';
 import { CreateService } from './create.service';
 
 @Component({

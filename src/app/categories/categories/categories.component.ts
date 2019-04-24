@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Category } from '../../models/category';
+import { Category } from '../../models/category.model';
 
 @Component({
   selector: 'app-categories',
@@ -8,7 +8,8 @@ import { Category } from '../../models/category';
 })
 export class CategoriesComponent implements OnInit {
   @Output() choose = new EventEmitter<string>();
-  categories: string[] = ['food', 'coffee', 'drinks', 'nightlife', 'nature', 'art', 'movies', 'other'];
+  public categories: string[] = ['food', 'coffee', 'drinks', 'nightlife', 'nature', 'art', 'movies', 'other'];
+
   names = {
     food: 'Food',
     coffee: 'Coffee&tea',
@@ -24,7 +25,7 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit() {}
 
-  chooseCategory(category: Category) {
+  public chooseCategory(category: Category) {
     this.choose.emit(category);
   }
 }

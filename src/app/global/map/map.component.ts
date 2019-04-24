@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, SimpleChanges, AfterViewInit } from '@angular/core';
 import { MapService } from './map.service';
-import { Coords } from '../../models/coords';
+import { Coords } from '../../models/coords.model';
 import { MapSearchService } from '../map-search/map-search.service';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Address } from '../../models/address';
-import { Category } from '../../models/category';
-import { Place } from '../../models/place';
+import { Address } from '../../models/address.model';
+import { Category } from '../../models/category.model';
+import { Place } from '../../models/place.model';
 
 @Component({
   selector: 'app-map',
@@ -64,6 +64,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
       console.log('cancel');
       return;
     }
+    console.log('set places');
     const markers = this.mapService.createMarksGroup(
       places.map(({ coords, title }) => ({ coords, tooltip: title })),
       category

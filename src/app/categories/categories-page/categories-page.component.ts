@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Category } from '../../models/category';
+import { Category } from '../../models/category.model';
 
 @Component({
   selector: 'app-categories-page',

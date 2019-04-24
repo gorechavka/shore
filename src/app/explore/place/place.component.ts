@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Place } from '../../models/place';
+import { Place } from '../../models/place.model';
 import { DatabaseService } from '../../core/db-service/database.service';
 
 @Component({

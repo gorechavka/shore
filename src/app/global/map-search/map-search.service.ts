@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { debounceTime, switchMap, map, catchError, distinctUntilChanged } from 'rxjs/operators';
 import { Observable, Subject, of } from 'rxjs';
-import { Address } from '../../models/address';
-import { geoAddress } from '../../models/geoAddress';
+import { Address } from '../../models/address.model';
+import { GeoAddress } from '../../models/geo-address.model';
 import { HttpService } from '../../core/http-service/http.service';
-import { Coords } from '../../models/coords';
+import { Coords } from '../../models/coords.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class MapSearchService {
 
   getCoords(query: string): Observable<Coords> {
     return this.httpService.get(`${this.BASE_URL}&q=${query}`).pipe(
-      map(([{ lat, lon }]: geoAddress[]) => ({ lat, lon })),
+      map(([{ lat, lon }]: GeoAddress[]) => ({ lat, lon })),
       catchError(err => of(err.message))
     );
   }

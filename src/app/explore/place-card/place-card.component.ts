@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
-import { Place } from '../../models/place';
+import { Place } from '../../models/place.model';
 
 @Component({
   selector: 'app-place-card',

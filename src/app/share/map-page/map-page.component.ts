@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
-import { Coords } from '../../models/coords';
+import { Coords } from '../../models/coords.model';
 import { ActivatedRoute } from '@angular/router';
-import { Place } from '../../models/place';
+import { Place } from '../../models/place.model';
 import { StateService } from '../../core/state-service/state.service';
 import { MapComponent } from '../../global/map/map.component';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { Category } from '../../models/category';
+import { Category } from '../../models/category.model';
 
 @Component({
   selector: 'app-map-page',

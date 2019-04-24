@@ -40,9 +40,6 @@ img.poster {
   color: black;
 }
 
-.btn__vote {
-  right: -20px;
-}
 
 .place__reviews {
   display: flex;
@@ -106,7 +103,7 @@ input:checked~.rate {
   height: 56px;
   padding: 0;
   position: absolute;
-  right: 40px;
+  right: -20px;
   bottom: 0px;
   background-color: transparent;
 }
