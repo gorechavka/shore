@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Coords } from '../../models/coords';
 import { Place } from '../../models/place';
@@ -9,6 +9,7 @@ import { CreateService } from './create.service';
   selector: 'app-create',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css']
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateComponent implements OnInit {
   @Input() category: Category;

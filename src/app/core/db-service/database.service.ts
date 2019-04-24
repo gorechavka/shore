@@ -4,8 +4,8 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { State } from '../../models/state';
 import { Place } from '../../models/place';
 import { Userdb } from '../../models/Userdb';
-import { map, retry, takeUntil } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
+import { map, retry } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

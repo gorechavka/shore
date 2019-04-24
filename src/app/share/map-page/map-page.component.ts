@@ -45,7 +45,6 @@ export class MapPageComponent implements OnInit, AfterViewInit, OnDestroy {
         )
       )
       .subscribe(places => {
-        console.log('set places');
         this.mapComponent.setPlaces(places, this.category);
       });
   }

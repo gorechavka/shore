@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { Place } from '../../models/place';
 
 @Component({
   selector: 'app-place-card',
   templateUrl: './place-card.component.html',
-  styleUrls: ['./place-card.component.css']
+  styleUrls: ['./place-card.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaceCardComponent implements OnInit, AfterViewInit {
   @Input() place: Place;
