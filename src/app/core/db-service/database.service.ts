@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
 import { StateService } from '../state-service/state.service';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { State } from '../../models/state';
-import { Place } from '../../models/place';
-import { Userdb } from '../../models/Userdb';
+import { State } from '../../models/state.model';
+import { Place } from '../../models/place.model';
+import { Userdb } from '../../models/userdb.model';
 import { map, retry } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { StateExpService } from '../state-service/state-exp.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
-  constructor(private stateService: StateService, private afDatabase: AngularFireDatabase) {
+  constructor(
+    private stateService: StateService,
+    private seService: StateExpService,
+    private afDatabase: AngularFireDatabase
+  ) {
     this.init();
   }
 
@@ -25,6 +30,7 @@ export class DatabaseService {
           console.log('got data');
           const places = Object.keys(data).map(id => ({ ...data[id], id }));
           this.stateService.setState(places);
+          this.seService.setState(places);
         },
         err => console.log(err.message)
       );

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Place } from '../../models/place.model';
 import { StateService } from '../../core/state-service/state.service';
-import { map, takeUntil, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Coords } from '../../models/coords.model';
 import { CountService } from '../../global/count-service/count.service';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { Category } from '../../models/category.model';
 
 @Component({
@@ -19,7 +19,7 @@ export class SearchPageComponent implements OnInit {
   searchOnMap = false;
   choosenPlace: Place = null;
   places$ = new BehaviorSubject<Place[]>([]);
-  initPlaces: Place[];
+  initPlaces: Place[] = [];
   _destroy$ = new Subject();
 
   constructor(private stateService: StateService, private route: ActivatedRoute, private countService: CountService) {
@@ -34,6 +34,17 @@ export class SearchPageComponent implements OnInit {
         this.initPlaces = places;
         this.places$.next(places);
       });
+
+    // this.stateExpService
+    //   .getState()
+    //   .pipe(
+    //     tap(place => console.log(place)),
+    //     filter(place => place.category === this.category)
+    //   )
+    //   .subscribe(place => {
+    //     this.initPlaces = [...this.initPlaces, place];
+    //     this.places$.next(this.initPlaces);
+    //   });
   }
 
   onNewCoords(coords: Coords) {
