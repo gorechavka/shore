@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import { DatabaseService } from './core/db-service/database.service';
 import { AuthService } from './core/auth-service/auth.service';
 import { StateService } from './core/state-service/state.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,12 @@ export class AppComponent implements OnInit {
   signedIn: boolean = false;
   private categories = ['food', 'drinks', 'coffee', 'nightlife', 'art', 'nature', 'movies', 'other'];
 
-  constructor(private dbService: DatabaseService, private auth: AuthService, private stateService: StateService) {}
+  constructor(
+    private dbService: DatabaseService,
+    private location: Location,
+    private auth: AuthService,
+    private stateService: StateService
+  ) {}
 
   ngOnInit() {
     if (!firebase.apps.length) {
@@ -33,5 +39,13 @@ export class AppComponent implements OnInit {
     if (this.categories.includes(category)) {
       this.stateService.setCategory(category);
     }
+  }
+
+  goBack() {
+    this.location.back();
+  }
+
+  goForward() {
+    this.location.forward();
   }
 }

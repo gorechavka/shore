@@ -18,6 +18,7 @@ export class SearchPageComponent implements OnInit {
   category: Category;
   searchOnMap = false;
   choosenPlace: Place = null;
+  showMore = false;
   places$ = new BehaviorSubject<Place[]>([]);
   initPlaces: Place[] = [];
   _destroy$ = new Subject();
@@ -47,6 +48,9 @@ export class SearchPageComponent implements OnInit {
 
   onMapOpenClick() {
     this.searchOnMap = true;
+  }
+  onMapCloseClick() {
+    this.searchOnMap = false;
   }
 
   onMapLoaded(map) {

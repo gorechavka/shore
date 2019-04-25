@@ -2,8 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DatabaseService } from '../../core/db-service/database.service';
 import { AuthService } from '../../core/auth-service/auth.service';
 import { PlaceComponent } from '../place/place.component';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, Observable } from 'rxjs';
+import { takeUntil, map } from 'rxjs/operators';
+import { MapSearchService } from '../../global/map-search/map-search.service';
 
 @Component({
   selector: 'app-place-modal',
@@ -12,8 +13,9 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class PlaceModalComponent extends PlaceComponent implements OnInit, OnDestroy {
   _$destroy = new Subject();
+  adress: Observable<string>;
 
-  constructor(dbService: DatabaseService, private auth: AuthService) {
+  constructor(dbService: DatabaseService, private mapSearch: MapSearchService, private auth: AuthService) {
     super(dbService);
   }
 
@@ -26,6 +28,7 @@ export class PlaceModalComponent extends PlaceComponent implements OnInit, OnDes
         this.userVoted = !!this.place.voted && this.place.voted.includes(uid);
       });
     this.setRate();
+    this.adress = this.mapSearch.getAddress(this.place.coords).pipe(map(adress => adress.display_name));
   }
 
   ngOnDestroy(): void {

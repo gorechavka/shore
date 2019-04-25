@@ -105,17 +105,17 @@ input:checked~.rate {
   position: absolute;
   right: -20px;
   bottom: 0px;
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .btn__vote i {
   font-size: 30px;
-  color: rgba(99, 93, 109, 0.5);
+  color: rgba(97, 92, 105, 0.5);
 }
 
 .btn__vote:hover i {
-  color: rgba(61, 201, 119, 0.568);
-  text-shadow: 0 0 2px rgba(94, 197, 137, 0.418)
+  color: rgba(80, 77, 90, 0.568);
+  text-shadow: 0 0 2px rgba(54, 46, 70, 0.418)
 }
 
 h5.title {

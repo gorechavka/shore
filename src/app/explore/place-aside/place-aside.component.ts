@@ -4,6 +4,8 @@ import { AuthService } from '../../core/auth-service/auth.service';
 import { PlaceComponent } from '../place/place.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { MapSearchService } from '../../global/map-search/map-search.service';
+import { Address } from '../../models/address.model';
 
 @Component({
   selector: 'app-place-aside',
@@ -13,7 +15,7 @@ import { takeUntil } from 'rxjs/operators';
 export class PlaceAsideComponent extends PlaceComponent implements OnInit {
   _destroy$ = new Subject();
 
-  constructor(dbService: DatabaseService, private auth: AuthService) {
+  constructor(public dbService: DatabaseService, private auth: AuthService) {
     super(dbService);
   }
 

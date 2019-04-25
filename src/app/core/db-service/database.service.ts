@@ -27,7 +27,9 @@ export class DatabaseService {
       )
       .subscribe(
         (data: State) => {
+          console.log(data);
           const places = Object.keys(data).map(id => ({ ...data[id], id }));
+          console.log(places);
           this.stateService.setState(places);
         },
         err => console.log(err.message)
@@ -53,11 +55,6 @@ export class DatabaseService {
     const category = newData.category;
     return this.afDatabase.list(`categories/${category}`).push(newData);
   }
-
-  // changeData(type: 'places' | 'users', key: string, newData: Place | Userdb): Promise<void> {
-
-  //   return this.afDatabase.list(type).update(key, newData);
-  // }
 
   changePlaceData(key: string, newData: Place) {
     const category = newData.category;

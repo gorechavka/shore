@@ -13,7 +13,11 @@ export class MapSearchComponent implements OnInit, OnDestroy {
   @Output() newCoords = new EventEmitter<Coords>();
   @Output() emptyQuery = new EventEmitter();
 
-  _destroy$: Subject<boolean> = new Subject<boolean>();
+  showError = false;
+
+  private isEmpty = true;
+
+  private _destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private mapSearchService: MapSearchService) {}
 
@@ -26,8 +30,12 @@ export class MapSearchComponent implements OnInit, OnDestroy {
         (coords: Coords) => {
           // обработка ошибок!!!
           if (coords.lat === undefined || coords.lon === undefined) {
+            if (!this.isEmpty) {
+              this.showError = true;
+            }
             return;
           }
+          this.showError = false;
           this.newCoords.emit(coords);
         },
         err => console.log(err)
@@ -37,7 +45,8 @@ export class MapSearchComponent implements OnInit, OnDestroy {
   onSearch(input: string) {
     if (!input) {
       this.emptyQuery.emit();
-    }
+      this.isEmpty = true;
+    } else this.isEmpty = false;
     this.mapSearchService.setQuery(input);
   }
 

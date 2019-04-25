@@ -1,9 +1,12 @@
 <main class="container">
   <div class="search__container">
     <app-map-search (newCoords)="onNewCoords($event)" (emptyQuery)="onStopSearch()"></app-map-search>
-    <a class=" btn-large map__btn z-depth-3" title="Искать на карте" (click)="onMapOpenClick()"></a>
+    <a class=" btn-large map__btn z-depth-3" title="Искать на карте" (click)="onMapOpenClick()"
+      *ngIf="!searchOnMap"></a>
+    <a class=" btn-large list__btn  z-depth-3" title="Отражать списком" (click)="onMapCloseClick()"
+      *ngIf="searchOnMap"></a>
   </div>
-  <app-place-list [places]="(places$|async)" *ngIf="!searchOnMap">
+  <app-place-list [places]="(places$|async)" *ngIf="!searchOnMap" [ngClass]="{'show-more': showMore}">
   </app-place-list>
   <div [ngClass]="{'map__container': true, 'z-depth-4': true, 'left': !!choosenPlace}" id="map" *ngIf="searchOnMap">
     <app-map (choosenPlace)="onChoosePlace($event)" [coords]="coords" #map (mapLoaded)=onMapLoaded(map)>
@@ -12,6 +15,8 @@
   <div class="aside__place" *ngIf="choosenPlace">
     <app-place-aside [place]="choosenPlace" (hide)="choosenPlace = null"></app-place-aside>
   </div>
-  <button class=" btn-floating arrow__btn btn-large" title="Показать больше"><i
+  <button class=" btn-floating arrow__btn btn-large" title="Показать больше" (click)="showMore = true"><i
       class="material-icons">keyboard_arrow_down</i></button>
+  <button class=" btn-floating arrow__btn btn-large" title="Показать больше" *ngIf="showMore"
+    (click)="showMore = false"><i class="material-icons">keyboard_arrow_up</i></button>
 </main>

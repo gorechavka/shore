@@ -2,7 +2,7 @@
   <button class="btn close__btn" (click)="onCloseClick()"><i class="close material-icons">close</i></button>
   <div class="place__poster">
     <img [attr.src]="place.image" class="poster" alt="кросивое место">
-    <button class="map__btn btn"></button>
+    <button class="map__btn btn" [title]="'Адрес:' + (adress|async)"></button>
   </div>
   <div class="place__info">
     <h2 class="place__title">{{place.title | uppercase}}</h2>

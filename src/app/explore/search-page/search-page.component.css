@@ -10,6 +10,10 @@ app-map-search {
   margin-top: 20px;
 }
 
+app-place-list.show-more {
+  margin-top: -100%;
+}
+
 nav {
   display: inline-block;
   margin: 20px 0;
@@ -26,7 +30,8 @@ input#search:focus {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.13), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
 }
 
-.map__btn {
+.map__btn,
+.list__btn {
   width: 80px;
   height: 80px;
   margin: 20px 50px 0 20px;
@@ -39,8 +44,15 @@ input#search:focus {
   filter: grayscale(1);
 }
 
-.map__btn:hover {
-  filter: grayscale(0);
+.map__btn:hover,
+.list__btn:hover {
+  filter: none;
+}
+
+.list__btn {
+  background-image: url('../../assets/imgs/list.png');
+  background-size: 52px 52px;
+  filter: grayscale(1) brightness(0.5)
 }
 
 .arrow__btn {

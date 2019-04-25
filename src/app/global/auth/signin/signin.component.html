@@ -1,4 +1,4 @@
-<form [formGroup]="form" (keydown.enter)="onSubmit()">
+<form [formGroup]="form" (keydown.enter)="onSubmit($event)">
   <div class="input-field">
     <i class="material-icons prefix">email</i>
     <input type="email" formControlName="email" [class.is-invalid]="emailInvalid" class="input" placeholder="Email"

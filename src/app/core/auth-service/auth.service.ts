@@ -57,7 +57,7 @@ export class AuthService {
 
   signout() {
     this.afAuth.auth.signOut();
-    if (this.router.routerState.snapshot.url.split('/')[1] === 'share') {
+    if (this.router.routerState.snapshot.url.split('/')[1] === 'share' || 'explore') {
       this.router.navigate(['auth']);
     }
   }

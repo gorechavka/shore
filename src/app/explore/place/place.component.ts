@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Place } from '../../models/place.model';
 import { DatabaseService } from '../../core/db-service/database.service';
+import { MapSearchService } from '../../global/map-search/map-search.service';
+import { Address } from '../../models/address.model';
 
 @Component({
   selector: 'app-place',

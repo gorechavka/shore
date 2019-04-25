@@ -186,8 +186,8 @@ input:checked~.rate {
 }
 
 .btn__vote:hover i {
-  color: rgba(61, 201, 119, 0.568);
-  text-shadow: 0 0 2px rgba(94, 197, 137, 0.418)
+  color: rgba(150, 142, 175, 0.568);
+  text-shadow: 0 0 2px rgba(140, 118, 199, 0.568)
 }
 
 .comment__form {

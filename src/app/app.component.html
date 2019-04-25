@@ -3,8 +3,10 @@
 <body>
   <nav class="header__nav">
     <div class="nav-wrapper">
-      <a href="" class="brand-logo">SHORE</a>
+      <a href="#" class="brand-logo">SH<img src="../app/assets/imgs/earth.png">RE</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a title="Назад" (click)="goBack()"><i class="material-icons">arrow_back</i></a></li>
+        <li><a title="Вперед" (click)="goForward()"><i class="material-icons">arrow_forward</i></a></li>
         <li><a routerLink="auth" *ngIf="!signedIn">
             SIGN IN
           </a></li>

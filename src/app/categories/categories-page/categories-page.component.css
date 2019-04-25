@@ -16,8 +16,14 @@
   position: absolute;
   bottom: 20px;
   right: 250px;
+  display: flex;
+  align-items: center;
 }
 
 .next__btn:hover {
   filter: brightness(1.5)
+}
+
+.next__btn i {
+  font-size: 30px;
 }
