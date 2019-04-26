@@ -12,21 +12,21 @@ export class StateService {
 
   constructor() {}
 
-  getState(): Observable<any> {
+  public getState(): Observable<any> {
     return this.state$.asObservable();
   }
 
-  setState(newState) {
+  public setState(newState) {
     console.log('set state');
     this.state$.next(newState);
   }
 
-  setCategory(category: string) {
+  public setCategory(category: string) {
     this.category$.next(category);
     localStorage.setItem('category', category);
   }
 
-  getCategory(): Observable<string> {
+  public getCategory(): Observable<string> {
     return this.category$.asObservable();
   }
 }

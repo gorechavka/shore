@@ -9,11 +9,11 @@ import { PasswordValidators } from './PasswordValidators.validator';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  form: FormGroup;
+  public form: FormGroup;
 
   constructor(private fb: FormBuilder, private auth: AuthService) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.form = this.fb.group({
       login: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9_\-]+$/), Validators.minLength(6)]],
       email: ['', [Validators.required, Validators.email]],
@@ -53,7 +53,7 @@ export class SignupComponent implements OnInit {
     return this._checkErrors('confirmation');
   }
 
-  onSubmit(e: Event) {
+  public onSubmit(e: Event) {
     e.preventDefault();
     const { login, email, password } = this.form.value;
     this.form.reset();

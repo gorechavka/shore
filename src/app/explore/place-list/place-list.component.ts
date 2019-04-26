@@ -8,17 +8,17 @@ import { Place } from '../../models/place.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaceListComponent {
-  @Input() places: Place[];
+  @Input() public places: Place[];
 
-  @Input() selectedPlace: string;
+  @Input() public selectedPlace: string;
 
-  loading: boolean = true;
+  public loading = true;
 
   constructor() {
     this.selectedPlace = null;
   }
 
-  onLoaded() {
+  public onLoaded() {
     this.loading = false;
   }
 }

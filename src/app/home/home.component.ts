@@ -9,17 +9,17 @@ import { Subject } from 'rxjs';
 export class HomeComponent {
   constructor() {}
 
-  pupilXPosition: number = 0;
-  pupilRotationAngle: number = 0;
+  public pupilXPosition = 0;
+  public pupilRotationAngle = 0;
 
-  containerWidth: number;
-  eyeWidth: number;
+  public containerWidth: number;
+  public eyeWidth: number;
 
   private mousePosition$ = new Subject<MouseEvent>();
 
-  @ViewChildren('pupil') pupils: QueryList<ElementRef>;
+  @ViewChildren('pupil') public pupils: QueryList<ElementRef>;
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     this.mousePosition$.asObservable().subscribe((e: MouseEvent) => {
       this.pupils.forEach(p => {
         const angle = this.countRotationAngle(e, p.nativeElement);
@@ -29,7 +29,7 @@ export class HomeComponent {
     });
   }
 
-  onMouseMove(e: MouseEvent, containerWidth: number) {
+  public onMouseMove(e: MouseEvent, containerWidth: number) {
     this.containerWidth = containerWidth;
     this.mousePosition$.next(e);
   }

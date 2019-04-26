@@ -14,23 +14,23 @@ import { Place } from '../../models/place.model';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
-  @Input() coords: Coords;
-  @Input() shareState = false;
-  @Input() category: Category;
+  @Input() public coords: Coords;
+  @Input() public shareState = false;
+  @Input() public category: Category;
 
-  @Output() newCoords = new EventEmitter<Coords>();
-  @Output() choosenPlace = new EventEmitter<Place>();
-  @Output() mapLoaded = new EventEmitter<boolean>();
+  @Output() public newCoords = new EventEmitter<Coords>();
+  @Output() public choosenPlace = new EventEmitter<Place>();
+  @Output() public mapLoaded = new EventEmitter<boolean>();
 
-  map;
-  markers: Array<any>;
-  adress: string;
+  public map;
+  public markers: Array<any>;
+  public adress: string;
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
+  public destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private mapService: MapService, private mapSearchService: MapSearchService) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.map = this.mapService.createMap('map');
     this.markers = this.mapService.createMarkersCluster();
     this.map.addLayer(this.markers);
@@ -55,11 +55,11 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     this.mapLoaded.emit(true);
   }
 
-  setPlaces(places: Place[], category: Category) {
+  public setPlaces(places: Place[], category: Category) {
     if (!places || !this.map) {
       console.log('cancel');
       return;
@@ -115,7 +115,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
     return adress.split(',')[0] + ', ' + adress.split(',')[1];
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.unsubscribe();
   }

@@ -12,14 +12,14 @@ import { MapSearchService } from '../../global/map-search/map-search.service';
   styleUrls: ['./place-modal.component.css']
 })
 export class PlaceModalComponent extends PlaceComponent implements OnInit, OnDestroy {
-  _$destroy = new Subject();
-  adress: Observable<string>;
+  public _$destroy = new Subject();
+  public adress: Observable<string>;
 
   constructor(dbService: DatabaseService, private mapSearch: MapSearchService, private auth: AuthService) {
     super(dbService);
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.auth
       .getUserId()
       .pipe(takeUntil(this._$destroy))
@@ -28,10 +28,17 @@ export class PlaceModalComponent extends PlaceComponent implements OnInit, OnDes
         this.userVoted = !!this.place.voted && this.place.voted.includes(uid);
       });
     this.setRate();
-    this.adress = this.mapSearch.getAddress(this.place.coords).pipe(map(adress => adress.display_name));
+    this.adress = this.mapSearch.getAddress(this.place.coords).pipe(
+      map(adress =>
+        adress.display_name
+          .split(',')
+          .slice(0, 3)
+          .join(',')
+      )
+    );
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this._$destroy.next();
     this._$destroy.unsubscribe();
   }

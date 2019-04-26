@@ -5,29 +5,30 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { DatabaseService } from '../db-service/database.service';
 import { User } from './user';
 import { map } from 'rxjs/operators';
+import { Userdb } from '../../models/userdb.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private _user$ = new BehaviorSubject<User>(null);
-  private _redirectUrl = '';
+  private _user$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  private _redirectUrl: string = '';
 
-  set redirectUrl(path) {
+  set redirectUrl(path: string) {
     this._redirectUrl = path;
   }
 
   constructor(private router: Router, private afAuth: AngularFireAuth, private dbService: DatabaseService) {
     this.afAuth.authState
       .pipe(
-        map(userData => {
+        map((userData: User) => {
           if (userData) {
             return { uid: userData.uid, email: userData.email };
           }
           return null;
         })
       )
-      .subscribe(user => this._user$.next(user));
+      .subscribe((user: User) => this._user$.next(user));
   }
 
   get user$(): Observable<User> {
@@ -35,38 +36,41 @@ export class AuthService {
   }
 
   get isLoggedIn$(): Observable<boolean> {
-    return this.user$.pipe(map(user => !!user));
+    return this.user$.pipe(map((user: User) => !!user));
   }
 
-  getUserId(): Observable<string> {
-    return this.user$.pipe(map(user => user.uid));
+  public getUserId(): Observable<string> {
+    return this.user$.pipe(map((user: User) => user.uid));
   }
 
-  emailSignin(email: string, password: string): Promise<Error | void> {
+  public emailSignin(email: string, password: string): Promise<Error | void> {
+    // tslint:disable-next-line: typedef
     return this.afAuth.auth.signInWithEmailAndPassword(email, password).then(_ => {
       this.redirect();
     });
   }
 
-  emailSignup(login: string, email: string, password: string): Promise<Error | void> {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(userCred => {
-      this.addUser(userCred.user.uid, { email, login, password });
-      this.redirect();
-    });
+  public emailSignup(login: string, email: string, password: string): Promise<Error | void> {
+    return this.afAuth.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCred: firebase.auth.UserCredential) => {
+        this.addUser(userCred.user.uid, { email, login, password });
+        this.redirect();
+      });
   }
 
-  signout() {
+  public signout() {
     this.afAuth.auth.signOut();
     if (this.router.routerState.snapshot.url.split('/')[1] === 'share' || 'explore') {
       this.router.navigate(['auth']);
     }
   }
 
-  addUser(uid, { email, login, password }) {
+  public addUser(uid: string, { email, login, password }: { [key: string]: string }) {
     this.dbService.changeUserData(uid, { email, login, password });
   }
 
-  redirect() {
+  public redirect() {
     this.router.navigate([this._redirectUrl]);
   }
 }

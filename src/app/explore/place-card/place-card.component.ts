@@ -8,26 +8,26 @@ import { Place } from '../../models/place.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaceCardComponent implements OnInit, AfterViewInit {
-  @Input() place: Place;
+  @Input() public place: Place;
 
-  @Output() select = new EventEmitter<string>();
+  @Output() public select = new EventEmitter<string>();
 
-  @Output() loaded = new EventEmitter<boolean>();
+  @Output() public loaded = new EventEmitter<boolean>();
 
-  photo: string;
-  name: string;
-  description: string;
+  public photo: string;
+  public name: string;
+  public description: string;
 
-  ngOnInit() {
+  public ngOnInit() {
     this.photo = `../assets/${this.place.image}`;
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     console.log('loaded');
     this.loaded.emit(true);
   }
 
-  selectPlace(name) {
+  public selectPlace(name) {
     this.select.emit(name);
   }
 }

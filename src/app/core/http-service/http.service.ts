@@ -9,14 +9,14 @@ import { Observable } from 'rxjs';
 export class HttpService {
   constructor(private httpClient: HttpClient) {}
 
-  get(url: string): Observable<string | Object> {
+  public get(url: string): Observable<string | Object> {
     return this.httpClient.get(url).pipe(
       retry(3),
       catchError(this.handleError)
     );
   }
 
-  handleError(err): string {
+  public handleError(err): string {
     if (err instanceof ErrorEvent) {
       console.log('An error occurred:', err.error.message);
     } else {

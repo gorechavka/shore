@@ -8,12 +8,12 @@ import { Place } from '../../models/place.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapPlaceComponent {
-  @Input() place: Place;
-  @Output() close = new EventEmitter();
+  @Input() public place: Place;
+  @Output() public close = new EventEmitter();
 
   constructor() {}
 
-  onCloseClick() {
+  public onCloseClick() {
     this.close.emit();
   }
 }

@@ -2,6 +2,7 @@
   width: 70vw;
   display: block;
   margin: auto;
+  height: 100vh;
 }
 
 .auth__btn {
@@ -17,4 +18,34 @@
 .auth__btn:hover {
   background-color: transparent;
   color: #492B8C;
+}
+
+.auth {
+  background: url('../../assets/imgs/policeman.png') no-repeat;
+  background-position: 52% 15%;
+  background-size: 200px;
+  height: 100%;
+  padding-top: 18%;
+  position: relative;
+}
+
+.auth::before {
+  content: 'Представьтесь, пожалуйста!';
+  position: absolute;
+  width: 250px;
+  height: 200px;
+  background-image: url('../../assets/imgs/bubble.png');
+  background-size: cover;
+  top: 0;
+  left: 23%;
+  display: flex;
+  padding-top: 50px;
+  text-align: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+app-signin,
+app-signup {
+  width: 500px;
 }

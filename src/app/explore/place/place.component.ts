@@ -10,15 +10,15 @@ import { Address } from '../../models/address.model';
   styleUrls: ['./place.component.css']
 })
 export class PlaceComponent {
-  @Input() place: Place;
+  @Input() public place: Place;
 
-  @Output() hide = new EventEmitter();
+  @Output() public hide = new EventEmitter();
 
-  rates = ['rate-1', 'rate-2', 'rate-3', 'rate-4', 'rate-5'];
-  uid: string;
-  userVoted: boolean = true;
-  placeRate: number;
-  inVoteState: boolean = false;
+  public rates = ['rate-1', 'rate-2', 'rate-3', 'rate-4', 'rate-5'];
+  public uid: string;
+  public userVoted = true;
+  public placeRate: number;
+  public inVoteState = false;
 
   constructor(public dbService: DatabaseService) {}
 

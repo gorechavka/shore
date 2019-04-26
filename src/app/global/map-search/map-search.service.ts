@@ -10,17 +10,17 @@ import { Coords } from '../../models/coords.model';
   providedIn: 'root'
 })
 export class MapSearchService {
-  query$ = new Subject<string>();
-  BASE_URL: string = 'https://nominatim.openstreetmap.org/search?format=json';
-  REVERSE_URL: string = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2';
+  public query$ = new Subject<string>();
+  public BASE_URL = 'https://nominatim.openstreetmap.org/search?format=json';
+  public REVERSE_URL = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2';
 
   constructor(private httpService: HttpService) {}
 
-  setQuery(input: string) {
+  public setQuery(input: string) {
     this.query$.next(input);
   }
 
-  searchQuery(): Observable<Coords> {
+  public searchQuery(): Observable<Coords> {
     return this.query$.asObservable().pipe(
       debounceTime(500),
       distinctUntilChanged(),
@@ -28,14 +28,14 @@ export class MapSearchService {
     );
   }
 
-  getCoords(query: string): Observable<Coords> {
+  public getCoords(query: string): Observable<Coords> {
     return this.httpService.get(`${this.BASE_URL}&q=${query}`).pipe(
       map(([{ lat, lon }]: GeoAddress[]) => ({ lat, lon })),
       catchError(err => of(err.message))
     );
   }
 
-  getAddress({ lat, lon }): Observable<Address> {
+  public getAddress({ lat, lon }): Observable<Address> {
     return this.httpService
       .get(`${this.REVERSE_URL}&lat=${lat}&lon=${lon}`)
       .pipe(map(({ address, display_name }: Address) => ({ address: address, display_name })));

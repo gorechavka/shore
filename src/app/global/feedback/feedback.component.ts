@@ -7,7 +7,7 @@ import { AbstractControl } from '@angular/forms';
   styleUrls: ['./feedback.component.css']
 })
 export class FeedbackComponent implements OnInit {
-  @Input() control: AbstractControl;
+  @Input() public control: AbstractControl;
 
   private config = {
     required: 'поле обязательно для заполнения',
@@ -24,7 +24,7 @@ export class FeedbackComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  public ngOnInit() {}
 
   get feedback(): string {
     for (const error in this.control.errors) {

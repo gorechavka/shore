@@ -7,10 +7,10 @@ import { Category } from '../../models/category.model';
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
-  @Output() choose = new EventEmitter<string>();
+  @Output() public readonly choose: EventEmitter<string> = new EventEmitter<string>();
   public categories: string[] = ['food', 'coffee', 'drinks', 'nightlife', 'nature', 'art', 'movies', 'other'];
 
-  names = {
+  public names: { [key: string]: string } = {
     food: 'Food',
     coffee: 'Coffee&tea',
     drinks: 'Drinks',
@@ -23,7 +23,7 @@ export class CategoriesComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  public ngOnInit() {}
 
   public chooseCategory(category: Category) {
     this.choose.emit(category);

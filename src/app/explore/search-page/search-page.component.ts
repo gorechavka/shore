@@ -14,20 +14,20 @@ import { Category } from '../../models/category.model';
   styleUrls: ['./search-page.component.css']
 })
 export class SearchPageComponent implements OnInit {
-  coords: Coords;
-  category: Category;
-  searchOnMap = false;
-  choosenPlace: Place = null;
-  showMore = false;
-  places$ = new BehaviorSubject<Place[]>([]);
-  initPlaces: Place[] = [];
-  _destroy$ = new Subject();
+  public coords: Coords;
+  public category: Category;
+  public searchOnMap = false;
+  public choosenPlace: Place = null;
+  public showMore = false;
+  public places$ = new BehaviorSubject<Place[]>([]);
+  public initPlaces: Place[] = [];
+  public _destroy$ = new Subject();
 
   constructor(private stateService: StateService, private route: ActivatedRoute, private countService: CountService) {
     this.category = <Category>this.route.snapshot.paramMap.get('category');
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.stateService
       .getState()
       .pipe(map<Place[], any>(places => places.filter(place => place.category === this.category)))
@@ -37,27 +37,27 @@ export class SearchPageComponent implements OnInit {
       });
   }
 
-  onNewCoords(coords: Coords) {
+  public onNewCoords(coords: Coords) {
     this.coords = coords;
     this.places$.next(this.initPlaces.filter(place => this.checkNeighborhood(place.coords, coords)));
   }
 
-  onStopSearch() {
+  public onStopSearch() {
     this.places$.next(this.initPlaces);
   }
 
-  onMapOpenClick() {
+  public onMapOpenClick() {
     this.searchOnMap = true;
   }
-  onMapCloseClick() {
+  public onMapCloseClick() {
     this.searchOnMap = false;
   }
 
-  onMapLoaded(map) {
+  public onMapLoaded(map) {
     this.places$.asObservable().subscribe(places => map.setPlaces(places, this.category));
   }
 
-  onChoosePlace(place) {
+  public onChoosePlace(place) {
     this.choosenPlace = place;
   }
 
@@ -65,7 +65,7 @@ export class SearchPageComponent implements OnInit {
     return this.countService.countDist(current, target) <= dist;
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.unsubscribe();
   }

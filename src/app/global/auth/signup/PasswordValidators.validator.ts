@@ -1,7 +1,7 @@
 import { ValidatorFn, AbstractControl, Validators } from '@angular/forms';
 
 export class PasswordValidators extends Validators {
-  static hasCapital(): ValidatorFn {
+  public static hasCapital(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const invalid = !/[A-Z]/.test(control.value);
 
@@ -9,7 +9,7 @@ export class PasswordValidators extends Validators {
     };
   }
 
-  static hasLowercase(): ValidatorFn {
+  public static hasLowercase(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const invalid = !/[a-z]/.test(control.value);
 
@@ -17,7 +17,7 @@ export class PasswordValidators extends Validators {
     };
   }
 
-  static hasNum(): ValidatorFn {
+  public static hasNum(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const invalid = !/[0-9]/.test(control.value);
 
@@ -25,7 +25,7 @@ export class PasswordValidators extends Validators {
     };
   }
 
-  static hasSpecial(): ValidatorFn {
+  public static hasSpecial(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const invalid = !/[_!#\+\-$]/.test(control.value);
 
@@ -33,7 +33,7 @@ export class PasswordValidators extends Validators {
     };
   }
 
-  static equal(password: AbstractControl): ValidatorFn {
+  public static equal(password: AbstractControl): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
       const invalid = control.value !== password.value;
 

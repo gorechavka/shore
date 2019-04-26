@@ -13,13 +13,13 @@ import { Address } from '../../models/address.model';
   styleUrls: ['./place-aside.component.css']
 })
 export class PlaceAsideComponent extends PlaceComponent implements OnInit {
-  _destroy$ = new Subject();
+  public _destroy$ = new Subject();
 
   constructor(public dbService: DatabaseService, private auth: AuthService) {
     super(dbService);
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.auth
       .getUserId()
       .pipe(takeUntil(this._destroy$))
@@ -30,7 +30,7 @@ export class PlaceAsideComponent extends PlaceComponent implements OnInit {
     this.setRate();
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.unsubscribe();
   }

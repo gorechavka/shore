@@ -7,7 +7,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef
 } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Coords } from '../../models/coords.model';
 import { Place } from '../../models/place.model';
 import { Category } from '../../models/category.model';
@@ -20,22 +20,23 @@ import { CreateService } from './create.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateComponent implements OnInit {
-  @Input() category: Category;
-  @Input() coords: Coords;
-  @Output() close = new EventEmitter();
+  @Input() public category: Category;
+  @Input() public coords: Coords;
+  @Output() public readonly close: EventEmitter<void> = new EventEmitter();
 
-  form: FormGroup;
-  place: Place;
-  image: string | ArrayBuffer;
-  imageLoaded: boolean;
+  public form: FormGroup;
+  public place: Place;
+  public image: string | ArrayBuffer;
+  public imageLoaded: boolean;
 
   constructor(private fb: FormBuilder, private createService: CreateService, private cdr: ChangeDetectorRef) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.form = this.fb.group({
       poster: [''],
       title: ['', [Validators.required, Validators.minLength(5)]],
-      description: ['', [Validators.required]]
+      description: ['', [Validators.required]],
+      address: ['', Validators.required]
     });
   }
 
@@ -51,7 +52,11 @@ export class CreateComponent implements OnInit {
     return this.form.get('poster').invalid && this.form.get('poster').touched;
   }
 
-  onFileChange(fileInput) {
+  get addressInvalid() {
+    return this.form.get('adress').invalid && this.form.get('adress').touched;
+  }
+
+  public onFileChange(fileInput) {
     const reader = new FileReader();
     reader.addEventListener('load', _ => {
       this.imageLoaded = true;
@@ -65,11 +70,11 @@ export class CreateComponent implements OnInit {
     }
   }
 
-  onSubmit(e: Event) {
+  public onSubmit(e: Event) {
     e.preventDefault();
 
     if (this.form.invalid) {
-      Object.values(this.form.controls).forEach(c => c.markAsTouched());
+      Object.values(this.form.controls).forEach((c: AbstractControl) => c.markAsTouched());
       return;
     }
 
@@ -78,7 +83,8 @@ export class CreateComponent implements OnInit {
       title: this.form.get('title').value,
       description: this.form.get('description').value,
       coords: this.coords,
-      image: this.image
+      image: this.image,
+      address: this.form.get('address').value
     };
 
     this.createService.addPlace(this.place);
@@ -86,7 +92,7 @@ export class CreateComponent implements OnInit {
     this.finish();
   }
 
-  onCloseClick() {
+  public onCloseClick() {
     this.close.emit();
   }
 

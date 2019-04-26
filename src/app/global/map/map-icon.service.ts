@@ -17,7 +17,7 @@ const icons = {
   providedIn: 'root'
 })
 export class MapIconService {
-  PlaceIcon;
+  public PlaceIcon;
   constructor() {
     this.PlaceIcon = L.Icon.extend({
       options: {
@@ -31,7 +31,7 @@ export class MapIconService {
     });
   }
 
-  createPlaceIcon(category: string = 'location') {
+  public createPlaceIcon(category: string = 'location') {
     return new this.PlaceIcon({ iconUrl: icons[category] });
   }
 }

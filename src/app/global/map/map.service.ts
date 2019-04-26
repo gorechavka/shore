@@ -8,7 +8,7 @@ declare let L;
 export class MapService {
   constructor(private mapIconService: MapIconService) {}
 
-  createMap(div) {
+  public createMap(div) {
     const map = L.map(div);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -17,7 +17,7 @@ export class MapService {
     return map;
   }
 
-  createMarkersCluster() {
+  public createMarkersCluster() {
     return L.markerClusterGroup({
       spiderfyOnMaxZoom: true,
       showCoverageOnHover: false,
@@ -25,7 +25,7 @@ export class MapService {
     });
   }
 
-  setDefaultLocation(map, markers) {
+  public setDefaultLocation(map, markers) {
     map.locate({ setView: true, maxZoom: 15, maximumAge: 1000 });
     map.on('locationerror', err => console.log(err.code));
     map.on('locationfound', _ => {
@@ -34,22 +34,22 @@ export class MapService {
     });
   }
 
-  navigateTo(map, coords: number[]) {
+  public navigateTo(map, coords: number[]) {
     map.setView(coords, 15);
   }
 
-  changeMark({ markers, coords, tooltip = undefined }, category?: string) {
+  public changeMark({ markers, coords, tooltip = undefined }, category?: string) {
     markers.clearLayers();
     return this.setNewMark({ markers, coords, tooltip }, category);
   }
 
-  setNewMark({ markers, coords, tooltip = undefined }, category: string) {
+  public setNewMark({ markers, coords, tooltip = undefined }, category: string) {
     const mark = L.marker(coords, { icon: this.mapIconService.createPlaceIcon(category) });
     markers.addLayer(mark);
     return mark;
   }
 
-  createMarksGroup(markers, category: string) {
+  public createMarksGroup(markers, category: string) {
     return markers.map(({ coords, tooltip }) => {
       const mark = L.marker(coords, { icon: this.mapIconService.createPlaceIcon(category) });
       mark.bindTooltip(tooltip);
@@ -57,15 +57,15 @@ export class MapService {
     });
   }
 
-  setTooltip(mark, tooltip) {
+  public setTooltip(mark, tooltip) {
     mark.bindTooltip(tooltip);
   }
 
-  openTooltip(mark) {
+  public openTooltip(mark) {
     mark.openTooltip();
   }
 
-  listen(event, map, handler) {
+  public listen(event, map, handler) {
     map.on(event, handler);
   }
 }

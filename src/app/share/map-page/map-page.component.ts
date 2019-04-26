@@ -14,24 +14,24 @@ import { Category } from '../../models/category.model';
   styleUrls: ['./map-page.component.css']
 })
 export class MapPageComponent implements OnInit, AfterViewInit, OnDestroy {
-  coords: Coords;
-  category: Category;
-  places: { coords: Coords; title: string }[];
-  placeChoosen: boolean;
-  placeToShow: Place;
+  public coords: Coords;
+  public category: Category;
+  public places: { coords: Coords; title: string }[];
+  public placeChoosen: boolean;
+  public placeToShow: Place;
 
   private destroy$ = new Subject<boolean>();
 
-  @ViewChild(MapComponent) mapComponent: MapComponent;
+  @ViewChild(MapComponent) public mapComponent: MapComponent;
 
   constructor(private route: ActivatedRoute, private stateService: StateService) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     // this.category = <Category>this.route.snapshot.paramMap.get('category');
     this.stateService.getCategory().subscribe(category => (this.category = <Category>category));
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     this.stateService
       .getState()
       .pipe(
@@ -50,11 +50,11 @@ export class MapPageComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
-  showPlace(place) {
+  public showPlace(place) {
     this.placeToShow = place;
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
   }

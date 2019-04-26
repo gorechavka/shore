@@ -12,7 +12,7 @@
     <app-map (choosenPlace)="onChoosePlace($event)" [coords]="coords" #map (mapLoaded)=onMapLoaded(map)>
     </app-map>
   </div>
-  <div class="aside__place" *ngIf="choosenPlace">
+  <div class="aside__place" *ngIf="choosenPlace&&searchOnMap">
     <app-place-aside [place]="choosenPlace" (hide)="choosenPlace = null"></app-place-aside>
   </div>
   <button class=" btn-floating arrow__btn btn-large" title="Показать больше" (click)="showMore = true"><i

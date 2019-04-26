@@ -9,22 +9,22 @@ import { StateService } from '../../core/state-service/state.service';
   styleUrls: ['./categories-page.component.css']
 })
 export class CategoriesPageComponent implements OnInit {
-  action: string;
-  category: Category;
+  public action: string;
+  public category: Category;
   constructor(private route: ActivatedRoute, private router: Router, private stateService: StateService) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.action = this.route.snapshot.paramMap.get('action');
   }
 
-  onCategoryChoose(category: Category) {
+  public onCategoryChoose(category: Category) {
     this.category = category;
     this.stateService.setCategory(category);
   }
 
-  goNext() {
+  public goNext() {
     this.router
       .navigate([`./${this.action}/${this.category}`])
-      .then(_ => console.log('navigated to ' + `./${this.action}/${this.category}`));
+      .then((_: boolean) => console.log('navigated to ' + `./${this.action}/${this.category}`));
   }
 }

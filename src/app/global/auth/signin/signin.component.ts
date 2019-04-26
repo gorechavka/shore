@@ -10,10 +10,10 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-  @Output() registrationRequest = new EventEmitter();
-  form: FormGroup;
+  @Output() public registrationRequest = new EventEmitter();
+  public form: FormGroup;
 
-  _destroy$ = new Subject();
+  public _destroy$ = new Subject();
 
   constructor(private fb: FormBuilder, private auth: AuthService) {
     this.form = this.fb.group({
@@ -22,7 +22,7 @@ export class SigninComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.auth.isLoggedIn$.pipe(takeUntil(this._destroy$)).subscribe(isLoggedIn => {
       if (isLoggedIn) {
         this.auth.redirect();
@@ -38,14 +38,14 @@ export class SigninComponent implements OnInit {
     return this._checkErrors('password');
   }
 
-  onSubmit(e: Event) {
+  public onSubmit(e: Event) {
     e.preventDefault();
     const { email, password } = this.form.value;
     this.form.reset();
     this.auth.emailSignin(email, password);
   }
 
-  onRegistrationClick() {
+  public onRegistrationClick() {
     this.registrationRequest.emit();
   }
 
@@ -53,7 +53,7 @@ export class SigninComponent implements OnInit {
     return this.form.get(control).invalid && (this.form.get(control).touched || this.form.get(control).dirty);
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.unsubscribe();
   }

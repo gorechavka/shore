@@ -11,9 +11,9 @@ import { Location } from '@angular/common';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'SHORE';
-  signedIn: boolean = false;
-  private categories = ['food', 'drinks', 'coffee', 'nightlife', 'art', 'nature', 'movies', 'other'];
+  public title: string = 'SHORE';
+  public signedIn: boolean = false;
+  private categories: string[] = ['food', 'drinks', 'coffee', 'nightlife', 'art', 'nature', 'movies', 'other'];
 
   constructor(
     private dbService: DatabaseService,
@@ -22,30 +22,30 @@ export class AppComponent implements OnInit {
     private stateService: StateService
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     if (!firebase.apps.length) {
       firebase.initializeApp({});
     }
-    this.auth.isLoggedIn$.subscribe(isLoggedIn => (this.signedIn = isLoggedIn));
+    this.auth.isLoggedIn$.subscribe((isLoggedIn: boolean) => (this.signedIn = isLoggedIn));
     this.setCategory();
   }
 
-  signOut() {
+  public signOut() {
     this.auth.signout();
   }
 
-  setCategory() {
-    const category = window.location.href.split('/').pop();
+  public setCategory() {
+    const category: string = window.location.href.split('/').pop();
     if (this.categories.includes(category)) {
       this.stateService.setCategory(category);
     }
   }
 
-  goBack() {
+  public goBack() {
     this.location.back();
   }
 
-  goForward() {
+  public goForward() {
     this.location.forward();
   }
 }

@@ -8,7 +8,7 @@ import { Place } from '../../models/place.model';
 export class CreateService {
   constructor(private dbService: DatabaseService) {}
 
-  addPlace(place: Place, errorHandler?): Promise<string | void> {
+  public addPlace(place: Place, errorHandler?): Promise<string | void> {
     return this.dbService
       .addPlaceData(place)
       .then(ref => this.handleSuccess(ref.key))

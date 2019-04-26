@@ -10,10 +10,10 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./map-search.component.css']
 })
 export class MapSearchComponent implements OnInit, OnDestroy {
-  @Output() newCoords = new EventEmitter<Coords>();
-  @Output() emptyQuery = new EventEmitter();
+  @Output() public newCoords = new EventEmitter<Coords>();
+  @Output() public emptyQuery = new EventEmitter();
 
-  showError = false;
+  public showError = false;
 
   private isEmpty = true;
 
@@ -21,7 +21,7 @@ export class MapSearchComponent implements OnInit, OnDestroy {
 
   constructor(private mapSearchService: MapSearchService) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     // обработка ошибок!!!
     this.mapSearchService
       .searchQuery()
@@ -42,7 +42,7 @@ export class MapSearchComponent implements OnInit, OnDestroy {
       );
   }
 
-  onSearch(input: string) {
+  public onSearch(input: string) {
     if (!input) {
       this.emptyQuery.emit();
       this.isEmpty = true;
@@ -50,7 +50,7 @@ export class MapSearchComponent implements OnInit, OnDestroy {
     this.mapSearchService.setQuery(input);
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
     this._destroy$.next();
     this._destroy$.unsubscribe();
   }

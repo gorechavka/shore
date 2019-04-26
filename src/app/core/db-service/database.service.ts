@@ -15,12 +15,12 @@ export class DatabaseService {
     this.init();
   }
 
-  init() {
+  public init() {
     this.stateService
       .getCategory()
       .pipe(
-        skipWhile(category => category == null),
-        switchMap(category => {
+        skipWhile((category: string) => category == null),
+        switchMap((category: string) => {
           return this.afDatabase.object(`categories/${category}`).valueChanges();
         }),
         retry(3)
@@ -28,7 +28,7 @@ export class DatabaseService {
       .subscribe(
         (data: State) => {
           console.log(data);
-          const places = Object.keys(data).map(id => ({ ...data[id], id }));
+          const places: Place[] = Object.keys(data).map(id => ({ ...data[id], id }));
           console.log(places);
           this.stateService.setState(places);
         },
@@ -36,32 +36,32 @@ export class DatabaseService {
       );
   }
 
-  getUserData(uid: string): Observable<Userdb> {
+  public getUserData(uid: string): Observable<Userdb> {
     return this.afDatabase
       .object('/users')
       .valueChanges()
-      .pipe(map((users: Userdb[]) => users.find(user => user.uid === uid)));
+      .pipe(map((users: Userdb[]) => users.find((user: Userdb) => user.uid === uid)));
   }
 
-  addData(type: 'places' | 'users', newData: Place | Userdb): firebase.database.ThenableReference {
+  public addData(type: 'places' | 'users', newData: Place | Userdb): firebase.database.ThenableReference {
     return this.afDatabase.list(type).push(newData);
   }
 
-  addUserData(newData: Userdb): firebase.database.ThenableReference {
+  public addUserData(newData: Userdb): firebase.database.ThenableReference {
     return this.afDatabase.list('users').push(newData);
   }
 
-  addPlaceData(newData: Place): firebase.database.ThenableReference {
-    const category = newData.category;
+  public addPlaceData(newData: Place): firebase.database.ThenableReference {
+    const category: string = newData.category;
     return this.afDatabase.list(`categories/${category}`).push(newData);
   }
 
-  changePlaceData(key: string, newData: Place) {
-    const category = newData.category;
+  public changePlaceData(key: string, newData: Place) {
+    const category: string = newData.category;
     return this.afDatabase.list(`categories/${category}`).update(key, newData);
   }
 
-  changeUserData(key: string, newData: Userdb) {
+  public changeUserData(key: string, newData: Userdb) {
     return this.afDatabase.list('users').update(key, newData);
   }
 }

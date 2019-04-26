@@ -11,20 +11,19 @@
     </fieldset>
     <fieldset class="info__loader">
       <h4>Расскажите о вашем месте</h4>
-      <div class="title__loader">
+      <div class="title__loader loader">
         <input type="text" name="title" placeholder="Название" id="name" formControlName="title"
           [class.is-invalid]="titleInvalid">
         <app-feedback *ngIf="titleInvalid" [control]="form.get('title')"></app-feedback>
       </div>
+      <div class="address__loader loader">
+        <input type="text" name="address" placeholder="Адрес" id="address" formControlName="address"
+          [class.is-invalid]="addressInvalid">
+        <app-feedback *ngIf="addressInvalid" [control]="form.get('address')"></app-feedback>
+      </div>
       <textarea name="decription" placeholder="Опишите ваше место" formControlName="description"
         [class.is-invalid]="descriptionInvalid"></textarea>
       <app-feedback *ngIf="descriptionInvalid" [control]="form.get('description')"></app-feedback>
-      <fieldset class="place__tags">
-        <input type="text" name="tag" placeholder="Добавьте теги" id="tags">
-        <button class="btn-floating add-tag__btn" title="Добавить тег">
-          <i class="material-icons">add</i>
-        </button>
-      </fieldset>
     </fieldset>
     <button type="submit" class="send__btn btn-large">
       Отправить</button>

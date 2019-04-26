@@ -6,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
-  isRegistered: boolean = true;
+  public isRegistered = true;
   constructor() {}
 
-  ngOnInit() {}
+  public ngOnInit() {}
 }

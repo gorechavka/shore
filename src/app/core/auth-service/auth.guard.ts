@@ -15,15 +15,15 @@ import { take, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate, CanActivateChild {
-  path: ActivatedRouteSnapshot[];
-  route: ActivatedRouteSnapshot;
+  public path: ActivatedRouteSnapshot[];
+  public route: ActivatedRouteSnapshot;
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
+  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
     return this.authService.isLoggedIn$.pipe(
       take(1),
-      map(isLoggedIn => {
+      map((isLoggedIn: boolean) => {
         if (isLoggedIn) {
           return true;
         }
@@ -34,7 +34,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     );
   }
 
-  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
+  public canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
     return this.canActivate(route, state);
   }
 }

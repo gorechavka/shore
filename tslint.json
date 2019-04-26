@@ -23,7 +23,6 @@
     "no-unused-css": true,
     "prefer-inline-decorator": true,
     "prefer-output-readonly": true,
-    "template-banana-in-box": true,
     "template-conditional-complexity": [true, 4],
     "template-cyclomatic-complexity": [true, 5],
     "template-i18n": [true, "check-id", "check-text"],
@@ -82,7 +81,7 @@
     ],
     "no-empty": false,
     "no-inferrable-types": [
-      true,
+      false,
       "ignore-params"
     ],
     "no-non-null-assertion": true,
