@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef
-} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { Coords } from '../../models/coords.model';
 import { Place } from '../../models/place.model';
@@ -16,8 +8,7 @@ import { CreateService } from './create.service';
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
   @Input() public category: Category;
@@ -29,7 +20,7 @@ export class CreateComponent implements OnInit {
   public image: string | ArrayBuffer;
   public imageLoaded: boolean;
 
-  constructor(private fb: FormBuilder, private createService: CreateService, private cdr: ChangeDetectorRef) {}
+  constructor(private fb: FormBuilder, private createService: CreateService) {}
 
   public ngOnInit() {
     this.form = this.fb.group({
@@ -53,7 +44,7 @@ export class CreateComponent implements OnInit {
   }
 
   get addressInvalid() {
-    return this.form.get('adress').invalid && this.form.get('adress').touched;
+    return this.form.get('address').invalid && this.form.get('address').touched;
   }
 
   public onFileChange(fileInput) {
@@ -61,7 +52,6 @@ export class CreateComponent implements OnInit {
     reader.addEventListener('load', _ => {
       this.imageLoaded = true;
       this.image = reader.result;
-      this.cdr.detectChanges();
     });
 
     if (fileInput.files && fileInput.files.length) {

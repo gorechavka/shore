@@ -56,7 +56,7 @@ export class SignupComponent implements OnInit {
   public onSubmit(e: Event) {
     e.preventDefault();
     const { login, email, password } = this.form.value;
-    this.form.reset();
+    // this.form.reset();
     this.auth.emailSignup(login, email, password).catch(err => console.log(err.message));
   }
 

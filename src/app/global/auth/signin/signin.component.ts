@@ -41,7 +41,7 @@ export class SigninComponent implements OnInit {
   public onSubmit(e: Event) {
     e.preventDefault();
     const { email, password } = this.form.value;
-    this.form.reset();
+    // this.form.reset();
     this.auth.emailSignin(email, password);
   }
 
