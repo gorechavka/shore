@@ -9,7 +9,10 @@ export class MapService {
   constructor(private mapIconService: MapIconService) {}
 
   public createMap(div) {
-    const map = L.map(div);
+    const map = L.map(div, {
+      center: [55.752121, 37.617664],
+      zoom: 14
+    });
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 20
