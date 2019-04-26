@@ -1,50 +1,177 @@
+.header__nav {
+  padding: 0 20px;
+  background-color: #4a148c;
+}
+
+
+
+body {
+  width: 100vw;
+  height: 100vh;
+
+}
+
+.brand-logo img {
+  height: 40px;
+  width: 40px;
+  margin-bottom: 4px;
+  display: inline-block;
+  vertical-align: center;
+  vertical-align: middle;
+}
+
 .container {
   position: relative;
   height: 100vh;
   margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
 }
 
+.btn-container {
+  margin-top: 250px;
+  position: relative;
+}
+
+
+
 .main-btn {
+  display: flex;
   width: 230px;
   height: 230px;
   border-radius: 50%;
   margin-top: 20px;
   margin-bottom: 50px;
-  font-size: 2rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  transition-duration: 0.5s;
+  transition-property: transform;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 150px 150px;
+  filter: grayscale(0.5);
+  color: #3a116d;
   /* display: inline-block; */
 }
 
-.explore {
-  background-color: transparent;
-  border: 2px solid #4a148c;
-  color: #4a148c;
+.main-btn:hover {
+  transform: translateY(-7px);
+  filter: none;
 }
 
-.explore:hover {
-  background-color: #4a148c;
-  color: white;
+.explore {
+  background-image: url('../assets/imgs/explore.png');
 }
+
 
 .share {
-  background-color: #4a148c;
+  background-image: url('../assets/imgs/share.png');
+
 }
 
-.share:hover {
-  background-color: transparent;
-  color: #4a148c;
+
+.main-btn::before {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: '';
+  top: 100%;
+  left: 5%;
+  height: 10px;
+  width: 90%;
+  opacity: 0;
+  background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  transition-duration: 0.5s;
+  transition-property: transform, opacity;
+
 }
 
-.btn-container {
-  text-align: center;
-  flex-grow: 1;
-  margin: 200px 100px;
+
+.main-btn:hover::before {
+  opacity: 1;
+  transform: translateY(7px);
 }
 
-.description {
-  font-size: 1.5rem;
+.main-btn span {
+  position: relative;
+  top: -130px;
+  font-size: 2.3rem;
+}
+
+
+.ufo {
+  font-size: 45vmin;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 105px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background: url('../assets/imgs/ufo.png') no-repeat center;
+  background-size: 450px 450px;
+  animation: bouncebody alternate infinite 400ms 40ms ease-in-out;
+}
+
+.eyes {
+  position: relative;
+  padding: 0 20px;
+  display: flex;
+}
+
+.eye {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 15px;
+  width: 100px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  border: 11px solid rgba(19, 17, 20);
+}
+
+.pupil {
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgba(19, 17, 20);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.light {
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+  background-color: rgba(255, 255, 255, 0.9);
+  margin: 4px 4px;
+}
+
+@keyframes appear {
+
+  to {
+    top: 0
+  }
+}
+
+@keyframes bouncebody {
+  to {
+    transform: scaleX(1.015) scaleY(0.985);
+  }
 }
