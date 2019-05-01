@@ -5,7 +5,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 # Описание
 
-Выпускной проект Tinkoff Fintech специальность Frontend, Angular
+ПРОЕКТ SHORE
+share&explore
 
 Этот проект позволяет людям делиться с другими людьми своими любимыми местами, отмечать их на карте, прикреплять картинки с описаниями и оставлять оценки
 
